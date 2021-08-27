@@ -17,29 +17,36 @@ namespace Cursed_Market_Reborn
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            textBox1.Text = Globals.REGISTRY_VALUE_PAKFILEPATH;
+            if(Globals.REGISTRY_VALUE_PAKFILEPATH != "NONE")
+                textBox1.Text = Globals.REGISTRY_VALUE_PAKFILEPATH;
         }
         private void InitializeSettings()
         {
-            if (Globals.REGISTRY_VALUE_THEME == "Default")
+            switch(Globals.REGISTRY_VALUE_THEME)
             {
-                comboBox1.SelectedIndex = 0;
-                this.BackColor = Color.White;
-                panel1.BackColor = SystemColors.Control;
-                label1.ForeColor = Color.Black;
-                label2.ForeColor = Color.Black;
-            }
-            else if (Globals.REGISTRY_VALUE_THEME == "Legacy")
-            {
-                comboBox1.SelectedIndex = 1;
-                this.BackColor = Color.FromArgb(255, 46, 51, 73);
-                panel1.BackColor = Color.FromArgb(255, 24, 30, 54);
-                label1.ForeColor = Color.White;
-                label2.ForeColor = Color.White;
-            }
-            else
-            {
-                comboBox1.SelectedIndex = 0;
+                case "Default":
+                    comboBox1.SelectedIndex = 0;
+                    this.BackColor = Color.White;
+                    panel1.BackColor = SystemColors.Control;
+                    label1.ForeColor = Color.Black;
+                    label2.ForeColor = Color.Black;
+                    break;
+
+                case "Legacy":
+                    comboBox1.SelectedIndex = 1;
+                    this.BackColor = Color.FromArgb(255, 46, 51, 73);
+                    panel1.BackColor = Color.FromArgb(255, 24, 30, 54);
+                    label1.ForeColor = Color.White;
+                    label2.ForeColor = Color.White;
+                    break;
+
+                case "NONE":
+                    comboBox1.SelectedIndex = 0;
+                    this.BackColor = Color.White;
+                    panel1.BackColor = SystemColors.Control;
+                    label1.ForeColor = Color.Black;
+                    label2.ForeColor = Color.Black;
+                    break;
             }
         }
 

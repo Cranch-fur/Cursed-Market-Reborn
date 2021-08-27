@@ -35,6 +35,9 @@
   <PropertyGroup>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="BCMakeCert">
       <HintPath>..\..\Libraries\BCMakeCert.dll</HintPath>
@@ -118,6 +121,7 @@
     <EmbeddedResource Include="WaitForm.resx">
       <DependentUpon>WaitForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -132,18 +136,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LOGO_Big.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\LOGO_Big_White.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="LOGO_IconFormat.ico" />
     <None Include="Resources\icon_tray.ico" />
     <None Include="Resources\icon_settings.ico" />
     <None Include="Resources\icon_overlay.ico" />
-    <None Include="Resources\LOGO_Icon_Settings.ico" />
-    <None Include="Resources\LOGO_Icon_Overlay.ico" />
     <None Include="Resources\icon_loading_3.ico" />
     <None Include="Resources\icon_loading_2.ico" />
     <None Include="Resources\icon_loading_1.ico" />
@@ -155,7 +151,6 @@
     <None Include="Resources\ICON_SMALL_BLOODPOINTS.png" />
     <None Include="Resources\ICON_SMALL_SHARDS.png" />
     <None Include="Resources\icon.ico" />
-    <None Include="Resources\LOGO_IconFormat.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,10 +10,8 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3000";
+        public const string PROGRAM_OFFLINEVERSION = "3001";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
-
-        public static Font Roboto_Medium;
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
         public static string REGISTRY_VALUE_PAKFOLDERPATH = REGISTRY_VALUE_PAKFILEPATH.Replace("\\pakchunk1-WindowsNoEditor.pak", "");
@@ -22,8 +20,8 @@ namespace Cursed_Market_Reborn
         public static string REGISTRY_GETVALUE(string WINREGNAME)
         {
             try
-            { return Registry.GetValue(REGISTRY_MAIN, WINREGNAME, null).ToString(); }
-            catch { return ""; }
+            { return Registry.GetValue(REGISTRY_MAIN, WINREGNAME, "NONE").ToString(); }
+            catch { return "NONE"; }
         }
 
         public static string OVERRIDEN_VALUE_USERAGENT = null;
@@ -45,7 +43,7 @@ namespace Cursed_Market_Reborn
                 else if ((string)JsQueueResponse["status"] == "MATCHED")
                 {
                     FIDDLERCORE_VALUE_ONLINELOBBY_ID = (string)JsQueueResponse["matchData"]["matchId"];
-                    return "NONE";
+                    return "MATCHED";
                 }
                 else
                     return "NONE";

@@ -21,7 +21,10 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Actions
         Form _OVERLAY = new Overlay();
         NotifyIcon CursedTray = new NotifyIcon();
+        static bool isProgramInitialized = false;
         static bool isFiddlerCoreActive = false;
+
+
         protected override void WndProc(ref Message win)
         {
             if (win.Msg == 0x11)
@@ -45,10 +48,6 @@ namespace Cursed_Market_Reborn
                 CranchPalace_getMarketFile(0);
                 CranchPalace_getFullProfile();
             });
-
-            textBox2.Text = "0";
-            textBox3.Text = "0";
-            textBox4.Text = "0";
         }
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -64,6 +63,9 @@ namespace Cursed_Market_Reborn
         }
         private void InitializeSettings()
         {
+            textBox2.Text = "0";
+            textBox3.Text = "0";
+            textBox4.Text = "0";
             try
             {
                 switch (Globals.REGISTRY_VALUE_THEME)
@@ -93,6 +95,7 @@ namespace Cursed_Market_Reborn
                         button5.BackColor = Color.DimGray;
                         button6.BackColor = Color.DimGray;
                         button7.BackColor = Color.DarkGray;
+                        button8.BackColor = Color.DimGray;
                         break;
 
                     case "Legacy":
@@ -120,10 +123,11 @@ namespace Cursed_Market_Reborn
                         button5.BackColor = Color.RoyalBlue;
                         button6.BackColor = Color.RoyalBlue;
                         button7.BackColor = Color.SlateBlue;
+                        button8.BackColor = Color.RoyalBlue;
 
                         break;
 
-                    case null:
+                    case "NONE":
                         Globals.INITIALIZEDTHEME = 0;
                         pictureBox1.Image = Properties.Resources.IMG_LOGO_BIG_BLACK;
                         pictureBox2.Image = Properties.Resources.ICON_SMALL_SETTINGS_BLACK;
@@ -148,6 +152,7 @@ namespace Cursed_Market_Reborn
                         button5.BackColor = Color.DimGray;
                         button6.BackColor = Color.DimGray;
                         button7.BackColor = Color.DarkGray;
+                        button8.BackColor = Color.DimGray;
                         break;
                 }
             }
@@ -163,17 +168,35 @@ namespace Cursed_Market_Reborn
                 {
                     while (true)
                     {
-                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION != null)
-                        {
-                            label5.Invoke(new Action(() => { label5.Text = $"QUEUE POSITION: {Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION()}"; }));
-                        }
-                        else
-                        {
+                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE")
                             label5.Invoke(new Action(() => { label5.Text = "QUEUE POSITION: NONE"; }));
-                        }
-                        Thread.Sleep(8000);
+                        else
+                            label5.Invoke(new Action(() => { label5.Text = $"QUEUE POSITION: {Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION()}"; }));
+
+                        Thread.Sleep(2500);
                     }
 
+                });
+            }
+            catch { }
+        }
+        private async void TRACK_BHVRSESSION()
+        {
+            try
+            {
+                await Task.Run(() =>
+                {
+                    while (true)
+                    {
+                        if(Globals.FIDDLERCORE_VALUE_BHVRSESSION != null && Globals.FIDDLERCORE_VALUE_BHVRSESSION != "")
+                        {
+                            if(textBox5.Text.Length == 33)
+                                button8.Invoke(new Action(() => { button8.Visible = true; }));
+                            textBox5.Invoke(new Action(() => { textBox5.Text = Globals.FIDDLERCORE_VALUE_BHVRSESSION; }));
+                        }
+
+                        Thread.Sleep(6000);
+                    }
                 });
             }
             catch { }
@@ -261,7 +284,11 @@ namespace Cursed_Market_Reborn
                     break;
             }
         }
-        private void CranchPalace_getFullProfile() => Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
+        private void CranchPalace_getFullProfile()
+        {
+            Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
+            button3.Invoke(new Action(() => { button3.Text = "START"; isProgramInitialized = true; }));
+        }
 
         ///////////////////////////////// => Main
         private void pictureBox2_Click(object sender, EventArgs e)
@@ -279,10 +306,15 @@ namespace Cursed_Market_Reborn
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (!isProgramInitialized)
+                return;
+
             FiddlerCore.Start();
             isFiddlerCoreActive = true;
             button3.Visible = false;
             TRACK_QUEUE();
+            TRACK_BHVRSESSION();
+            textBox5.Visible = true;
         }
 
         private async void button4_Click(object sender, EventArgs e)
@@ -303,6 +335,7 @@ namespace Cursed_Market_Reborn
                             if (NetServices.REQUEST_DOWNLOAD(Globals.SSL_SHIPPING, Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip"))
                             {
                                 ZipFile.ExtractToDirectory(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip", Globals.REGISTRY_VALUE_PAKFOLDERPATH);
+                                File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
                                 waitform.Close();
                                 MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                             }
@@ -335,6 +368,7 @@ namespace Cursed_Market_Reborn
                             if (NetServices.REQUEST_DOWNLOAD(Globals.SSL_PTB, Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip"))
                             {
                                 ZipFile.ExtractToDirectory(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip", Globals.REGISTRY_VALUE_PAKFOLDERPATH);
+                                File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
                                 waitform.Close();
                                 MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
                             }
@@ -383,21 +417,15 @@ namespace Cursed_Market_Reborn
 
         private void button5_Click(object sender, EventArgs e)
         {
-            if (textBox1 != null)
+            if (textBox1.Text != "")
             {
                 if (Globals.FIDDLERCORE_VALUE_BHVRSESSION != null)
-                {
                     NetServices.REQUEST_POST($"https://{Globals.FIDDLERCORE_VALUE_PLATFORM}.bhvrdbd.com/api/v1/players/friends/add", "", Globals.OVERRIDEN_VALUE_USERAGENT, "bhvrSession=" + Globals.FIDDLERCORE_VALUE_BHVRSESSION, "{\"ids\":[\"" + textBox1.Text + "\"],\"platform\":\"kraken\"}");
-                }
                 else
-                {
                     MessageBox.Show("Please, start your game with Cursed Market launched before sending friend request.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                }
             }
             else
-            {
                 MessageBox.Show("Please, specify CloudId of the player you want to add. He can find it on the very bottom of the game settings menu, hidden by \"*\" symbols.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-            }
         }
 
         private void checkBox4_CheckedChanged(object sender, EventArgs e)
@@ -426,22 +454,36 @@ namespace Cursed_Market_Reborn
             }
         }
 
+        private static bool isKeypressDigit(KeyPressEventArgs e, string currentstring)
+        {
+            if (!Char.IsDigit(e.KeyChar) && e.KeyChar != 8 && e.KeyChar != 127)
+                return false;
+            else if (currentstring != "")
+            {
+                if (currentstring[0] == '0')
+                {
+                    if (e.KeyChar >= 49 && e.KeyChar <= 57)
+                        return false;
+                }
+            }
+            return true;
+        }
         private void textBox2_TextChanged(object sender, EventArgs e) => Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS = textBox2.Text;
         private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar))
+            if (!isKeypressDigit(e, Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS))
                 e.Handled = true;
         }
         private void textBox3_TextChanged(object sender, EventArgs e) => Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS = textBox3.Text;
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar))
+            if (!isKeypressDigit(e, Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS))
                 e.Handled = true;
         }
         private void textBox4_TextChanged(object sender, EventArgs e) => Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS = textBox4.Text;
         private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!Char.IsDigit(e.KeyChar))
+            if (!isKeypressDigit(e, Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS))
                 e.Handled = true;
         }
 
@@ -473,5 +515,7 @@ namespace Cursed_Market_Reborn
             else
                 MessageBox.Show("Please, wait for Market File initialize before exporting it.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         }
+
+        private void button8_Click(object sender, EventArgs e) => Clipboard.SetText(textBox5.Text);
     }
 }

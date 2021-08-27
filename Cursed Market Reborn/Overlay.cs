@@ -49,7 +49,7 @@ namespace Cursed_Market_Reborn
                     label1.BackColor = Color.FromArgb(255, 46, 51, 73);
                     break;
 
-                case null:
+                case "NONE":
                     label1.ForeColor = Color.Black;
                     label1.BackColor = Color.WhiteSmoke;
                     break;
@@ -69,14 +69,10 @@ namespace Cursed_Market_Reborn
                 {
                     while (true)
                     {
-                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION != null & Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION() != "NONE")
-                        {
-                            label1.Invoke(new Action(() => { label1.Text = Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(); }));
-                        }
-                        else
-                        {
+                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE")
                             label1.Invoke(new Action(() => { label1.Text = ""; }));
-                        }
+                        else
+                            label1.Invoke(new Action(() => { label1.Text = Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(); }));
                         Thread.Sleep(2500);
                     }
 

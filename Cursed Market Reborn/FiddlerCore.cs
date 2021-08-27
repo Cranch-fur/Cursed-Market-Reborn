@@ -93,6 +93,11 @@ namespace Cursed_Market_Reborn
                 oSession.utilDecodeResponse();
                 Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes);
             }
+            if (oSession.uriContains("api/v1/match"))
+            {
+                oSession.utilDecodeResponse();
+                Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = null;
+            }
             if (oSession.uriContains("api/v1/auth/provider/steam/login?token="))
             {
                 Globals.FIDDLERCORE_VALUE_UID = Globals.FIDDLERCORE_VALUETRANSFER_UID(oSession.url.ToString());

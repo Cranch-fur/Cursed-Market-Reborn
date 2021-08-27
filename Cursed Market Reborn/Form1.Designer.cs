@@ -64,6 +64,8 @@ namespace Cursed_Market_Reborn
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.button8 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -92,12 +94,13 @@ namespace Cursed_Market_Reborn
             this.button7.BackColor = System.Drawing.Color.DarkGray;
             this.button7.FlatAppearance.BorderSize = 0;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button7.ForeColor = System.Drawing.Color.White;
             this.button7.Location = new System.Drawing.Point(0, 0);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(24, 23);
             this.button7.TabIndex = 32;
-            this.button7.Text = "T";
+            this.button7.Text = "~\t";
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -143,7 +146,7 @@ namespace Cursed_Market_Reborn
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(217, 20);
             this.button3.TabIndex = 3;
-            this.button3.Text = "START";
+            this.button3.Text = "PLEASE, WAIT... ";
             this.button3.UseVisualStyleBackColor = false;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -283,9 +286,9 @@ namespace Cursed_Market_Reborn
             this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button5.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button5.ForeColor = System.Drawing.Color.White;
-            this.button5.Location = new System.Drawing.Point(507, 337);
+            this.button5.Location = new System.Drawing.Point(507, 336);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(51, 19);
+            this.button5.Size = new System.Drawing.Size(51, 20);
             this.button5.TabIndex = 19;
             this.button5.Text = "SEND";
             this.button5.UseVisualStyleBackColor = false;
@@ -306,7 +309,7 @@ namespace Cursed_Market_Reborn
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(304, 383);
+            this.textBox2.Location = new System.Drawing.Point(301, 383);
             this.textBox2.MaxLength = 7;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(59, 21);
@@ -330,7 +333,7 @@ namespace Cursed_Market_Reborn
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(373, 383);
+            this.textBox3.Location = new System.Drawing.Point(371, 383);
             this.textBox3.MaxLength = 7;
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(59, 21);
@@ -368,7 +371,7 @@ namespace Cursed_Market_Reborn
             // pictureBox8
             // 
             this.pictureBox8.Image = global::Cursed_Market_Reborn.Properties.Resources.ICON_SMALL_AURIC;
-            this.pictureBox8.Location = new System.Drawing.Point(456, 405);
+            this.pictureBox8.Location = new System.Drawing.Point(454, 405);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(36, 36);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -379,7 +382,7 @@ namespace Cursed_Market_Reborn
             // pictureBox7
             // 
             this.pictureBox7.Image = global::Cursed_Market_Reborn.Properties.Resources.ICON_SMALL_SHARDS;
-            this.pictureBox7.Location = new System.Drawing.Point(387, 405);
+            this.pictureBox7.Location = new System.Drawing.Point(382, 405);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(36, 36);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -390,7 +393,7 @@ namespace Cursed_Market_Reborn
             // pictureBox6
             // 
             this.pictureBox6.Image = global::Cursed_Market_Reborn.Properties.Resources.ICON_SMALL_BLOODPOINTS;
-            this.pictureBox6.Location = new System.Drawing.Point(317, 405);
+            this.pictureBox6.Location = new System.Drawing.Point(312, 405);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(36, 36);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -472,12 +475,43 @@ namespace Cursed_Market_Reborn
             this.label8.TabIndex = 31;
             this.label8.Text = "SERVERNAME 2021 RELEASE | MADE BY CRANCH (КРАНЧ) THE WOLF, WITH SIZZER";
             // 
+            // textBox5
+            // 
+            this.textBox5.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.textBox5.Location = new System.Drawing.Point(301, 444);
+            this.textBox5.MaxLength = 512;
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(200, 21);
+            this.textBox5.TabIndex = 32;
+            this.textBox5.Text = "bhvrSession will be shown here...";
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox5.Visible = false;
+            // 
+            // button8
+            // 
+            this.button8.BackColor = System.Drawing.Color.DimGray;
+            this.button8.FlatAppearance.BorderSize = 0;
+            this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button8.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button8.ForeColor = System.Drawing.Color.White;
+            this.button8.Location = new System.Drawing.Point(507, 444);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(51, 21);
+            this.button8.TabIndex = 33;
+            this.button8.Text = "COPY";
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Visible = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(659, 523);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.textBox5);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox8);
@@ -566,6 +600,8 @@ namespace Cursed_Market_Reborn
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Button button8;
     }
 }
 
