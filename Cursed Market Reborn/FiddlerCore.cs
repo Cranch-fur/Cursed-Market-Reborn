@@ -7,7 +7,6 @@ namespace Cursed_Market_Reborn
         static FiddlerCore()
         {
             FiddlerApplication.BeforeRequest += FiddlerToCatchBeforeRequest;
-            FiddlerApplication.BeforeResponse += FiddlerToCatchBeforeResponse;
             FiddlerApplication.AfterSessionComplete += FiddlerToCatchAfterSessionComplete;
         }
         private static bool EnsureRootCertificate()
@@ -81,10 +80,6 @@ namespace Cursed_Market_Reborn
                     oSession.utilSetResponseBody("{\"list\":[{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS + ",\"currency\":\"Shards\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS + ",\"currency\":\"Cells\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS + ",\"currency\":\"BonusBloodpoints\"},{\"balance\":0,\"currency\":\"Bloodpoints\"}]}");
                 }
             }
-        }
-        public static void FiddlerToCatchBeforeResponse(Session oSession)
-        {
-
         }
         public static void FiddlerToCatchAfterSessionComplete(Session oSession)
         {

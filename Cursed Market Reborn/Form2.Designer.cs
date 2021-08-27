@@ -108,7 +108,8 @@ namespace Cursed_Market_Reborn
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
             "Default (Black & White)",
-            "Legacy (Dead By Modlight Style)"});
+            "Legacy (Dead By Modlight Style)",
+            "Dark Memories (Shades of Gray)"});
             this.comboBox1.Location = new System.Drawing.Point(373, 263);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(202, 21);

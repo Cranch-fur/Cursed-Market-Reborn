@@ -49,6 +49,11 @@ namespace Cursed_Market_Reborn
                     label1.BackColor = Color.FromArgb(255, 46, 51, 73);
                     break;
 
+                case "DarkMemories":
+                    label1.ForeColor = Color.White;
+                    label1.BackColor = Color.FromArgb(255, 44, 47, 51);
+                    break;
+
                 case "NONE":
                     label1.ForeColor = Color.Black;
                     label1.BackColor = Color.WhiteSmoke;

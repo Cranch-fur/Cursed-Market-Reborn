@@ -100,6 +100,7 @@ namespace Cursed_Market_Reborn
 
                     case "Legacy":
                         Globals.INITIALIZEDTHEME = 1;
+                        pictureBox5.Visible = false;
                         pictureBox1.Image = Properties.Resources.IMG_LOGO_BIG_WHITE;
                         pictureBox2.Image = Properties.Resources.ICON_SMALL_SETTINGS_WHITE;
                         this.BackColor = Color.FromArgb(255, 46, 51, 73);
@@ -124,7 +125,35 @@ namespace Cursed_Market_Reborn
                         button6.BackColor = Color.RoyalBlue;
                         button7.BackColor = Color.SlateBlue;
                         button8.BackColor = Color.RoyalBlue;
+                        break;
 
+                    case "DarkMemories":
+                        Globals.INITIALIZEDTHEME = 2;
+                        pictureBox5.Visible = false;
+                        pictureBox1.Image = Properties.Resources.IMG_LOGO_BIG_WHITE;
+                        pictureBox2.Image = Properties.Resources.ICON_SMALL_SETTINGS_WHITE;
+                        this.BackColor = Color.FromArgb(255, 44, 47, 51);
+                        panel1.BackColor = Color.FromArgb(255, 35, 39, 42);
+                        label1.ForeColor = Color.White;
+                        label2.ForeColor = Color.White;
+                        label3.ForeColor = Color.White;
+                        label4.ForeColor = Color.White;
+                        label5.ForeColor = Color.White;
+                        label6.ForeColor = Color.White;
+                        label7.ForeColor = Color.White;
+                        label8.ForeColor = Color.DimGray;
+                        checkBox1.ForeColor = Color.White;
+                        checkBox2.ForeColor = Color.White;
+                        checkBox3.ForeColor = Color.White;
+                        checkBox4.ForeColor = Color.White;
+                        checkBox5.ForeColor = Color.White;
+                        button3.BackColor = Color.FromArgb(255, 65, 65, 65);
+                        button3.ForeColor = Color.White;
+                        button4.BackColor = Color.FromArgb(255, 85, 85, 85);
+                        button5.BackColor = Color.FromArgb(255, 85, 85, 85);
+                        button6.BackColor = Color.FromArgb(255, 85, 85, 85);
+                        button7.BackColor = Color.SlateBlue;
+                        button8.BackColor = Color.FromArgb(255, 85, 85, 85);
                         break;
 
                     case "NONE":
@@ -195,7 +224,7 @@ namespace Cursed_Market_Reborn
                             textBox5.Invoke(new Action(() => { textBox5.Text = Globals.FIDDLERCORE_VALUE_BHVRSESSION; }));
                         }
 
-                        Thread.Sleep(6000);
+                        Thread.Sleep(8000);
                     }
                 });
             }
@@ -299,14 +328,12 @@ namespace Cursed_Market_Reborn
                 settingsmenu.ShowDialog();
             }
             else
-            {
                 MessageBox.Show("Settings Menu not available while Cursed Market is active.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if (!isProgramInitialized)
+            if (isProgramInitialized == false)
                 return;
 
             FiddlerCore.Start();

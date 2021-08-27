@@ -17,6 +17,8 @@ namespace Cursed_Market_Reborn
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
                 request.Timeout = 5000;
+                request.ServicePoint.Expect100Continue = true;
+
                 request.UserAgent = "Cursed Market";
                 request.ContentType = "application/json";
 
@@ -38,7 +40,7 @@ namespace Cursed_Market_Reborn
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
                 request.Timeout = 5000;
-                request.ServicePoint.Expect100Continue = false;
+                request.ServicePoint.Expect100Continue = true;
 
                 if (useragent != "")
                     request.UserAgent = useragent;

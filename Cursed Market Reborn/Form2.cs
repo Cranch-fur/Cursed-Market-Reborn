@@ -40,6 +40,14 @@ namespace Cursed_Market_Reborn
                     label2.ForeColor = Color.White;
                     break;
 
+                case "DarkMemories":
+                    comboBox1.SelectedIndex = 2;
+                    this.BackColor = Color.FromArgb(255, 44, 47, 51);
+                    panel1.BackColor = Color.FromArgb(255, 35, 39, 42);
+                    label1.ForeColor = Color.White;
+                    label2.ForeColor = Color.White;
+                    break;
+
                 case "NONE":
                     comboBox1.SelectedIndex = 0;
                     this.BackColor = Color.White;
@@ -101,6 +109,11 @@ namespace Cursed_Market_Reborn
 
                         case 1:
                             Registry.SetValue(Globals.REGISTRY_MAIN, "SelectedTheme", "Legacy");
+                            isAnythingChanged = true;
+                            break;
+
+                        case 2:
+                            Registry.SetValue(Globals.REGISTRY_MAIN, "SelectedTheme", "DarkMemories");
                             isAnythingChanged = true;
                             break;
 
