@@ -136,7 +136,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LOGO_IconFormat.ico" />
     <None Include="Resources\icon_tray.ico" />
     <None Include="Resources\icon_settings.ico" />
     <None Include="Resources\icon_overlay.ico" />

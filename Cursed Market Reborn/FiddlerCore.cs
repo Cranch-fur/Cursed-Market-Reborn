@@ -31,6 +31,11 @@ namespace Cursed_Market_Reborn
         public static void Stop()
         {
             FiddlerApplication.Shutdown();
+            try
+            {
+                string registrykey = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings";
+                Microsoft.Win32.Registry.SetValue(registrykey, "ProxyEnable", 0);
+            } catch { }
         }
         public static void FiddlerToCatchBeforeRequest(Session oSession)
         {
@@ -78,6 +83,14 @@ namespace Cursed_Market_Reborn
                 {
                     oSession.utilCreateResponseAndBypassServer();
                     oSession.utilSetResponseBody("{\"list\":[{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS + ",\"currency\":\"Shards\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS + ",\"currency\":\"Cells\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS + ",\"currency\":\"BonusBloodpoints\"},{\"balance\":0,\"currency\":\"Bloodpoints\"}]}");
+                }
+            }
+            if (Globals.FIDDLERCORE_BOOL_FREEBLOODWEB == true)
+            {
+                if (oSession.uriContains("v1/wallet/withdraw"))
+                {
+                    oSession.utilCreateResponseAndBypassServer();
+                    oSession.utilSetResponseBody("{\"userId\":\"null\",\"balance\":0,\"currency\":\"USCents\"}");
                 }
             }
         }

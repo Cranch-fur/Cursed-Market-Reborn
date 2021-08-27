@@ -87,8 +87,9 @@ namespace Cursed_Market_Reborn
                         checkBox1.ForeColor = Color.Black;
                         checkBox2.ForeColor = Color.Black;
                         checkBox3.ForeColor = Color.Black;
-                        checkBox3.ForeColor = Color.Black;
-                        checkBox3.ForeColor = Color.Black;
+                        checkBox4.ForeColor = Color.Black;
+                        checkBox5.ForeColor = Color.Black;
+                        checkBox6.ForeColor = Color.Black;
                         button3.BackColor = Color.Black;
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.DimGray;
@@ -118,6 +119,7 @@ namespace Cursed_Market_Reborn
                         checkBox3.ForeColor = Color.White;
                         checkBox4.ForeColor = Color.White;
                         checkBox5.ForeColor = Color.White;
+                        checkBox6.ForeColor = Color.White;
                         button3.BackColor = Color.IndianRed;
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.RoyalBlue;
@@ -147,6 +149,7 @@ namespace Cursed_Market_Reborn
                         checkBox3.ForeColor = Color.White;
                         checkBox4.ForeColor = Color.White;
                         checkBox5.ForeColor = Color.White;
+                        checkBox6.ForeColor = Color.White;
                         button3.BackColor = Color.FromArgb(255, 65, 65, 65);
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.FromArgb(255, 85, 85, 85);
@@ -173,8 +176,9 @@ namespace Cursed_Market_Reborn
                         checkBox1.ForeColor = Color.Black;
                         checkBox2.ForeColor = Color.Black;
                         checkBox3.ForeColor = Color.Black;
-                        checkBox3.ForeColor = Color.Black;
-                        checkBox3.ForeColor = Color.Black;
+                        checkBox4.ForeColor = Color.Black;
+                        checkBox5.ForeColor = Color.Black;
+                        checkBox6.ForeColor = Color.Black;
                         button3.BackColor = Color.Black;
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.DimGray;
@@ -432,6 +436,9 @@ namespace Cursed_Market_Reborn
                 Globals.FIDDLERCORE_BOOL_SILENTFULLPROFILE = true;
             else
                 Globals.FIDDLERCORE_BOOL_SILENTFULLPROFILE = false;
+
+            if(isFiddlerCoreActive == true)
+                MessageBox.Show("Changes was made when program is already running... Restart your game to see SaveFile changes.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -520,6 +527,9 @@ namespace Cursed_Market_Reborn
                 CranchPalace_getMarketFile(1);
             else
                 CranchPalace_getMarketFile(0);
+
+            if (isFiddlerCoreActive == true)
+                MessageBox.Show("Changes was made when program is already running... Restart your game to see MarketFile changes.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -544,5 +554,13 @@ namespace Cursed_Market_Reborn
         }
 
         private void button8_Click(object sender, EventArgs e) => Clipboard.SetText(textBox5.Text);
+
+        private void checkBox6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox6.Checked == true)
+                Globals.FIDDLERCORE_BOOL_FREEBLOODWEB = true;
+            else
+                Globals.FIDDLERCORE_BOOL_FREEBLOODWEB = false;
+        }
     }
 }
