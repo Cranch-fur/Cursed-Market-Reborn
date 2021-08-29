@@ -281,6 +281,16 @@ namespace Cursed_Market_Reborn
             else
             {
                 Globals.OVERRIDEN_VALUE_USERAGENT = (string)JsVersionCheck["validUserAgent"];
+                if ((bool)JsVersionCheck["isNewsAvailable"] == true)
+                {
+                    if((bool)JsVersionCheck["isNewsContainsLink"] == true)
+                    {
+                        DialogResult newsdialogue = MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                        if (newsdialogue == DialogResult.Yes)
+                            Process.Start((string)JsVersionCheck["newsLink"]);
+                    } else
+                        MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                }
             }
         }
 
