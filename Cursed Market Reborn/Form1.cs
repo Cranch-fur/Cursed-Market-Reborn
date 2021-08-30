@@ -4,6 +4,7 @@
 /// SERVERNAME 2021
 /////////////////////////////////
 
+using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Diagnostics;
@@ -20,6 +21,7 @@ namespace Cursed_Market_Reborn
     {
         ///////////////////////////////// => High Priority Actions
         Form _OVERLAY = new Overlay();
+        Form _CROSSHAIR = new Crosshair();
         NotifyIcon CursedTray = new NotifyIcon();
         static bool isProgramInitialized = false;
         static bool isFiddlerCoreActive = false;
@@ -66,6 +68,16 @@ namespace Cursed_Market_Reborn
             textBox2.Text = "0";
             textBox3.Text = "0";
             textBox4.Text = "0";
+            comboBox2.SelectedItem = Globals.CROSSHAIR_VALUE_SELECTEDCROSSHAIR;
+            if (Globals.CROSSHAIR_VALUE_OPACITY != -1 && Globals.CROSSHAIR_VALUE_OPACITY != 0)
+                trackBar1.Value = Globals.CROSSHAIR_VALUE_OPACITY;
+            else
+            {
+                Globals.CROSSHAIR_VALUE_OPACITY = 10;
+                trackBar1.Value = 10;
+            }
+            label9.Text = Convert.ToString(trackBar1.Value * 10) + "%";
+
             try
             {
                 switch (Globals.REGISTRY_VALUE_THEME)
@@ -84,12 +96,14 @@ namespace Cursed_Market_Reborn
                         label6.ForeColor = Color.Black;
                         label7.ForeColor = Color.Black;
                         label8.ForeColor = Color.Gainsboro;
+                        label9.ForeColor = Color.Black;
                         checkBox1.ForeColor = Color.Black;
                         checkBox2.ForeColor = Color.Black;
                         checkBox3.ForeColor = Color.Black;
                         checkBox4.ForeColor = Color.Black;
                         checkBox5.ForeColor = Color.Black;
                         checkBox6.ForeColor = Color.Black;
+                        checkBox7.ForeColor = Color.Black;
                         button3.BackColor = Color.Black;
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.DimGray;
@@ -114,12 +128,14 @@ namespace Cursed_Market_Reborn
                         label6.ForeColor = Color.White;
                         label7.ForeColor = Color.White;
                         label8.ForeColor = Color.DimGray;
+                        label9.ForeColor = Color.White;
                         checkBox1.ForeColor = Color.White;
                         checkBox2.ForeColor = Color.White;
                         checkBox3.ForeColor = Color.White;
                         checkBox4.ForeColor = Color.White;
                         checkBox5.ForeColor = Color.White;
                         checkBox6.ForeColor = Color.White;
+                        checkBox7.ForeColor = Color.White;
                         button3.BackColor = Color.IndianRed;
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.RoyalBlue;
@@ -143,6 +159,7 @@ namespace Cursed_Market_Reborn
                         label5.ForeColor = Color.White;
                         label6.ForeColor = Color.White;
                         label7.ForeColor = Color.White;
+                        label9.ForeColor = Color.White;
                         label8.ForeColor = Color.DimGray;
                         checkBox1.ForeColor = Color.White;
                         checkBox2.ForeColor = Color.White;
@@ -150,6 +167,7 @@ namespace Cursed_Market_Reborn
                         checkBox4.ForeColor = Color.White;
                         checkBox5.ForeColor = Color.White;
                         checkBox6.ForeColor = Color.White;
+                        checkBox7.ForeColor = Color.White;
                         button3.BackColor = Color.FromArgb(255, 65, 65, 65);
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.FromArgb(255, 85, 85, 85);
@@ -159,7 +177,7 @@ namespace Cursed_Market_Reborn
                         button8.BackColor = Color.FromArgb(255, 85, 85, 85);
                         break;
 
-                    case "NONE":
+                    default:
                         Globals.INITIALIZEDTHEME = 0;
                         pictureBox1.Image = Properties.Resources.IMG_LOGO_BIG_BLACK;
                         pictureBox2.Image = Properties.Resources.ICON_SMALL_SETTINGS_BLACK;
@@ -173,12 +191,14 @@ namespace Cursed_Market_Reborn
                         label6.ForeColor = Color.Black;
                         label7.ForeColor = Color.Black;
                         label8.ForeColor = Color.Gainsboro;
+                        label9.ForeColor = Color.Black;
                         checkBox1.ForeColor = Color.Black;
                         checkBox2.ForeColor = Color.Black;
                         checkBox3.ForeColor = Color.Black;
                         checkBox4.ForeColor = Color.Black;
                         checkBox5.ForeColor = Color.Black;
                         checkBox6.ForeColor = Color.Black;
+                        checkBox7.ForeColor = Color.Black;
                         button3.BackColor = Color.Black;
                         button3.ForeColor = Color.White;
                         button4.BackColor = Color.DimGray;
@@ -330,7 +350,22 @@ namespace Cursed_Market_Reborn
         private void CranchPalace_getFullProfile()
         {
             Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
-            button3.Invoke(new Action(() => { button3.Text = "START"; isProgramInitialized = true; }));
+            button3.Invoke(new Action(() => 
+            {   button3.Text = "START"; 
+                checkBox1.Visible = true;
+                checkBox2.Visible = true;
+                checkBox3.Visible = true;
+                checkBox4.Visible = true;
+                checkBox5.Visible = true;
+                checkBox6.Visible = true;
+                checkBox7.Visible = true;
+                label5.Visible = true;
+                label6.Visible = true;
+                textBox1.Visible = true;
+                button5.Visible = true;
+                button6.Visible = true;
+                isProgramInitialized = true;
+            }));
         }
 
         ///////////////////////////////// => Main
@@ -571,6 +606,46 @@ namespace Cursed_Market_Reborn
                 Globals.FIDDLERCORE_BOOL_FREEBLOODWEB = true;
             else
                 Globals.FIDDLERCORE_BOOL_FREEBLOODWEB = false;
+        }
+
+        private void checkBox7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox7.Checked == true)
+            {
+                if (Globals.CROSSHAIR_VALUE_SELECTEDCROSSHAIR == "NONE")
+                    comboBox2.SelectedIndex = 0;
+                _CROSSHAIR.Show();
+                comboBox2.Visible = true;
+                trackBar1.Visible = true;
+                label9.Visible = true;
+            } else {
+                _CROSSHAIR.Hide();
+                comboBox2.Visible = false;
+                trackBar1.Visible = false;
+                label9.Visible = false;
+            }
+        }
+
+        private void comboBox2_SelectedValueChanged(object sender, EventArgs e)
+        {
+            if (isProgramInitialized == true)
+            {
+                if (comboBox2.SelectedItem != null)
+                {
+                    Registry.SetValue(Globals.REGISTRY_MAIN, "SelectedCrosshair", comboBox2.SelectedItem.ToString());
+                    Globals.CROSSHAIR_VALUE_SELECTEDCROSSHAIR = comboBox2.SelectedItem.ToString();
+                }
+            }
+        }
+
+        private void trackBar1_ValueChanged(object sender, EventArgs e)
+        {
+            if (isProgramInitialized == true)
+            {
+                Registry.SetValue(Globals.REGISTRY_MAIN, "CrosshairOpacity", trackBar1.Value);
+                Globals.CROSSHAIR_VALUE_OPACITY = trackBar1.Value;
+                label9.Text = Convert.ToString(trackBar1.Value * 10) + "%";
+            }
         }
     }
 }

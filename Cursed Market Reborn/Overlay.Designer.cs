@@ -53,7 +53,7 @@ namespace Cursed_Market_Reborn
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Overlay";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Overlay";
+            this.Text = "Overlay: QUEUE";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Overlay_FormClosing);
             this.Load += new System.EventHandler(this.Overlay_Load);
             this.ResumeLayout(false);

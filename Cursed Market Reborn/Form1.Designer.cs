@@ -67,6 +67,10 @@ namespace Cursed_Market_Reborn
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.button8 = new System.Windows.Forms.Button();
             this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.label9 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -76,6 +80,7 @@ namespace Cursed_Market_Reborn
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -221,10 +226,11 @@ namespace Cursed_Market_Reborn
             this.label5.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label5.Location = new System.Drawing.Point(97, 319);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(232, 14);
+            this.label5.Size = new System.Drawing.Size(190, 14);
             this.label5.TabIndex = 13;
             this.label5.Text = "QUEUE POSITION: NONE";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label5.Visible = false;
             // 
             // checkBox1
             // 
@@ -236,6 +242,7 @@ namespace Cursed_Market_Reborn
             this.checkBox1.TabIndex = 14;
             this.checkBox1.Text = "Disable Ingame Chat Filter";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.Visible = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // checkBox2
@@ -248,6 +255,7 @@ namespace Cursed_Market_Reborn
             this.checkBox2.TabIndex = 15;
             this.checkBox2.Text = "Silent SaveFile (Temp)";
             this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.Visible = false;
             this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
             // checkBox3
@@ -260,6 +268,7 @@ namespace Cursed_Market_Reborn
             this.checkBox3.TabIndex = 16;
             this.checkBox3.Text = "Queue UI";
             this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.Visible = false;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
             // textBox1
@@ -269,6 +278,7 @@ namespace Cursed_Market_Reborn
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(200, 21);
             this.textBox1.TabIndex = 17;
+            this.textBox1.Visible = false;
             // 
             // label6
             // 
@@ -279,6 +289,7 @@ namespace Cursed_Market_Reborn
             this.label6.TabIndex = 18;
             this.label6.Text = "ADD FRIEND VIA CLOUD-ID";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label6.Visible = false;
             // 
             // button5
             // 
@@ -293,6 +304,7 @@ namespace Cursed_Market_Reborn
             this.button5.TabIndex = 19;
             this.button5.Text = "SEND";
             this.button5.UseVisualStyleBackColor = false;
+            this.button5.Visible = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // checkBox4
@@ -305,6 +317,7 @@ namespace Cursed_Market_Reborn
             this.checkBox4.TabIndex = 21;
             this.checkBox4.Text = "Spoof Currencies (only visual)";
             this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.Visible = false;
             this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
             // 
             // textBox2
@@ -367,6 +380,7 @@ namespace Cursed_Market_Reborn
             this.checkBox5.TabIndex = 26;
             this.checkBox5.Text = "Unlock DLC\'s Only";
             this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkBox5.Visible = false;
             this.checkBox5.CheckedChanged += new System.EventHandler(this.checkBox5_CheckedChanged);
             // 
             // pictureBox8
@@ -407,14 +421,14 @@ namespace Cursed_Market_Reborn
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Location = new System.Drawing.Point(80, 300);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(499, 198);
+            this.pictureBox4.Size = new System.Drawing.Size(499, 218);
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Cursed_Market_Reborn.Properties.Resources.ICON_SMALL_SETTINGS_BLACK;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 499);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 519);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(32, 32);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -446,7 +460,7 @@ namespace Cursed_Market_Reborn
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Location = new System.Drawing.Point(0, 0);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(659, 543);
+            this.pictureBox5.Size = new System.Drawing.Size(659, 563);
             this.pictureBox5.TabIndex = 20;
             this.pictureBox5.TabStop = false;
             // 
@@ -457,12 +471,13 @@ namespace Cursed_Market_Reborn
             this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button6.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Location = new System.Drawing.Point(100, 464);
+            this.button6.Location = new System.Drawing.Point(100, 484);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(112, 20);
             this.button6.TabIndex = 30;
             this.button6.Text = "EXPORT MARKET";
             this.button6.UseVisualStyleBackColor = false;
+            this.button6.Visible = false;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // label8
@@ -470,7 +485,7 @@ namespace Cursed_Market_Reborn
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label8.Location = new System.Drawing.Point(113, 501);
+            this.label8.Location = new System.Drawing.Point(113, 521);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(432, 13);
             this.label8.TabIndex = 31;
@@ -479,7 +494,7 @@ namespace Cursed_Market_Reborn
             // textBox5
             // 
             this.textBox5.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(301, 464);
+            this.textBox5.Location = new System.Drawing.Point(301, 484);
             this.textBox5.MaxLength = 512;
             this.textBox5.Name = "textBox5";
             this.textBox5.ReadOnly = true;
@@ -496,7 +511,7 @@ namespace Cursed_Market_Reborn
             this.button8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button8.Font = new System.Drawing.Font("Roboto", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.button8.ForeColor = System.Drawing.Color.White;
-            this.button8.Location = new System.Drawing.Point(507, 464);
+            this.button8.Location = new System.Drawing.Point(507, 484);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(51, 21);
             this.button8.TabIndex = 33;
@@ -515,14 +530,72 @@ namespace Cursed_Market_Reborn
             this.checkBox6.TabIndex = 34;
             this.checkBox6.Text = "Free Bloodweb";
             this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkBox6.Visible = false;
             this.checkBox6.CheckedChanged += new System.EventHandler(this.checkBox6_CheckedChanged);
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Font = new System.Drawing.Font("Roboto", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.checkBox7.Location = new System.Drawing.Point(100, 460);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(78, 18);
+            this.checkBox7.TabIndex = 35;
+            this.checkBox7.Text = "Crosshair";
+            this.checkBox7.UseVisualStyleBackColor = true;
+            this.checkBox7.Visible = false;
+            this.checkBox7.CheckedChanged += new System.EventHandler(this.checkBox7_CheckedChanged);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Circle (Black)",
+            "Circle (White)"});
+            this.comboBox2.Location = new System.Drawing.Point(178, 457);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(97, 21);
+            this.comboBox2.TabIndex = 36;
+            this.comboBox2.Visible = false;
+            this.comboBox2.SelectedValueChanged += new System.EventHandler(this.comboBox2_SelectedValueChanged);
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.AutoSize = false;
+            this.trackBar1.LargeChange = 0;
+            this.trackBar1.Location = new System.Drawing.Point(301, 449);
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(200, 29);
+            this.trackBar1.SmallChange = 0;
+            this.trackBar1.TabIndex = 37;
+            this.trackBar1.Value = 10;
+            this.trackBar1.Visible = false;
+            this.trackBar1.ValueChanged += new System.EventHandler(this.trackBar1_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Roboto", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label9.Location = new System.Drawing.Point(498, 450);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 25);
+            this.label9.TabIndex = 39;
+            this.label9.Text = "100%";
+            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label9.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(659, 543);
+            this.ClientSize = new System.Drawing.Size(659, 563);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.checkBox7);
             this.Controls.Add(this.checkBox6);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.textBox5);
@@ -573,6 +646,7 @@ namespace Cursed_Market_Reborn
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -617,6 +691,10 @@ namespace Cursed_Market_Reborn
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckBox checkBox6;
+        private System.Windows.Forms.CheckBox checkBox7;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Label label9;
     }
 }
 

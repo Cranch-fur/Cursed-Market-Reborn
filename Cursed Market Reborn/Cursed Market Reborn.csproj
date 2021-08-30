@@ -68,6 +68,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Crosshair.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Crosshair.Designer.cs">
+      <DependentUpon>Crosshair.cs</DependentUpon>
+    </Compile>
     <Compile Include="Extensions.cs" />
     <Compile Include="FiddlerCore.cs" />
     <Compile Include="Form1.cs">
@@ -104,6 +110,9 @@
     <Compile Include="WaitForm.Designer.cs">
       <DependentUpon>WaitForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Crosshair.resx">
+      <DependentUpon>Crosshair.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -150,6 +159,15 @@
     <None Include="Resources\ICON_SMALL_BLOODPOINTS.png" />
     <None Include="Resources\ICON_SMALL_SHARDS.png" />
     <None Include="Resources\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_DEFAULT_CIRCLE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_DEFAULT_CIRCLE_WHITE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_WIDE_EYESTYLED.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

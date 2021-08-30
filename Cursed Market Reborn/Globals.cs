@@ -1,5 +1,4 @@
 ﻿using Microsoft.Win32;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
@@ -10,7 +9,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3101";
+        public const string PROGRAM_OFFLINEVERSION = "3200";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
@@ -22,6 +21,12 @@ namespace Cursed_Market_Reborn
             try
             { return Registry.GetValue(REGISTRY_MAIN, WINREGNAME, "NONE").ToString(); }
             catch { return "NONE"; }
+        }
+        public static int REGISTRY_GETINTVALUE(string WINREGNAME)
+        {
+            try
+            { return Convert.ToInt32(Registry.GetValue(REGISTRY_MAIN, WINREGNAME, -1)); }
+            catch { return -1; }
         }
 
         public static string OVERRIDEN_VALUE_USERAGENT = null;
@@ -68,19 +73,11 @@ namespace Cursed_Market_Reborn
             }
             else return null;
         }
-        public static string FIDDLERCORE_VALUETRANSFER_QUEUERANK(string input)
-        {
-            dynamic JsQueueRequest = JsonConvert.DeserializeObject(input);
-            JsQueueRequest["rank"] = FIDDLERCORE_VALUE_RANKSPOOF_RANK;
-            return JsonConvert.SerializeObject(JsQueueRequest, Formatting.None);
-        }
 
         public static bool FIDDLERCORE_BOOL_SILENTFULLPROFILE = false;
         public static bool FIDDLERCORE_BOOL_ANTICHATFILTER = false;
         public static bool FIDDLERCORE_BOOL_CURRENCYSPOOF = false;
         public static bool FIDDLERCORE_BOOL_FREEBLOODWEB = false;
-        public static bool FIDDLERCORE_BOOL_RANKSPOOF = false;
-        public static int FIDDLERCORE_VALUE_RANKSPOOF_RANK = 20;
         public static string FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS = null;
         public static string FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS = null;
         public static string FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS = null;
@@ -94,5 +91,8 @@ namespace Cursed_Market_Reborn
             var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
             return System.Text.Encoding.ASCII.GetString(base64EncodedBytes);
         }
+
+        public static string CROSSHAIR_VALUE_SELECTEDCROSSHAIR = REGISTRY_GETVALUE("SelectedCrosshair");
+        public static int CROSSHAIR_VALUE_OPACITY = REGISTRY_GETINTVALUE("CrosshairOpacity");
     }
 }

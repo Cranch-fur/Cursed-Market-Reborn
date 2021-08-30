@@ -20,8 +20,8 @@ namespace Cursed_Market_Reborn
             InitializeComponent();
             InitializeSettings();
             this.Icon = Properties.Resources.icon_overlay;
-            this.Width = Screen.PrimaryScreen.WorkingArea.Width;
-            this.Height = Screen.PrimaryScreen.WorkingArea.Height;
+            this.Width = Screen.PrimaryScreen.Bounds.Width;
+            this.Height = Screen.PrimaryScreen.Bounds.Height;
             label1.Location = new Point(this.Width / 128, this.Height / 128);
         }
 
@@ -54,7 +54,7 @@ namespace Cursed_Market_Reborn
                     label1.BackColor = Color.FromArgb(255, 44, 47, 51);
                     break;
 
-                case "NONE":
+                default:
                     label1.ForeColor = Color.Black;
                     label1.BackColor = Color.WhiteSmoke;
                     break;
