@@ -25,6 +25,8 @@ namespace Cursed_Market_Reborn
         NotifyIcon CursedTray = new NotifyIcon();
         static bool isProgramInitialized = false;
         static bool isFiddlerCoreActive = false;
+        static bool isMarketFileInitialized = false;
+        static bool isMarketFileLocal = false;
 
 
         protected override void WndProc(ref Message win)
@@ -241,9 +243,9 @@ namespace Cursed_Market_Reborn
                 {
                     while (true)
                     {
-                        if(Globals.FIDDLERCORE_VALUE_BHVRSESSION != null && Globals.FIDDLERCORE_VALUE_BHVRSESSION != "")
+                        if (Globals.FIDDLERCORE_VALUE_BHVRSESSION != null && Globals.FIDDLERCORE_VALUE_BHVRSESSION != "")
                         {
-                            if(textBox5.Text.Length == 33)
+                            if (textBox5.Text.Length == 33)
                                 button8.Invoke(new Action(() => { button8.Visible = true; }));
                             textBox5.Invoke(new Action(() => { textBox5.Text = Globals.FIDDLERCORE_VALUE_BHVRSESSION; }));
                         }
@@ -288,70 +290,120 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => CranchPalace
         private void CranchPalace_checkVersion()
         {
-            var JsVersionCheck = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/versionCheck", $"version={Globals.PROGRAM_OFFLINEVERSION}", ""));
-            if ((bool)JsVersionCheck["isValid"] == false)
+            try
             {
-                DialogResult askforupdate = MessageBox.Show("New Version of Cursed Market is available!\nDownload Latest Version?", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                if (askforupdate == DialogResult.Yes)
+                var JsVersionCheck = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/versionCheck", $"version={Globals.PROGRAM_OFFLINEVERSION}", ""));
+                if ((bool)JsVersionCheck["isValid"] == false)
                 {
-                    Process.Start((string)JsVersionCheck["DownloadLink"]);
-                    this.Close();
-                }
-            }
-            else
-            {
-                Globals.OVERRIDEN_VALUE_USERAGENT = (string)JsVersionCheck["validUserAgent"];
-                if ((bool)JsVersionCheck["isNewsAvailable"] == true)
-                {
-                    if((bool)JsVersionCheck["isNewsContainsLink"] == true)
+                    DialogResult askforupdate = MessageBox.Show("New Version of Cursed Market is available!\nDownload Latest Version?", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                    if (askforupdate == DialogResult.Yes)
                     {
-                        DialogResult newsdialogue = MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-                        if (newsdialogue == DialogResult.Yes)
-                            Process.Start((string)JsVersionCheck["newsLink"]);
-                    } else
-                        MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                        Process.Start((string)JsVersionCheck["DownloadLink"]);
+                        this.Close();
+                    }
+                }
+                else
+                {
+                    Globals.OVERRIDEN_VALUE_USERAGENT = (string)JsVersionCheck["validUserAgent"];
+                    if ((bool)JsVersionCheck["isNewsAvailable"] == true)
+                    {
+                        if ((bool)JsVersionCheck["isNewsContainsLink"] == true)
+                        {
+                            DialogResult newsdialogue = MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                            if (newsdialogue == DialogResult.Yes)
+                                Process.Start((string)JsVersionCheck["newsLink"]);
+                        }
+                        else
+                            MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+
+
+                        if ((bool)JsVersionCheck["isNewsCollapsingApplication"] == true)
+                            this.Close();
+                    }
                 }
             }
+            catch { }
         }
 
         private void CranchPalace_checkSSLAvailability()
         {
-            var JsSSLAvailability = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/availableSSL", "", ""));
-            if ((bool)JsSSLAvailability["isShippingAvailable"] == true)
+            try
             {
-                label2.Text = label2.Text + (string)JsSSLAvailability["ShippingDescription"];
-                Globals.SSL_SHIPPING = (string)JsSSLAvailability["ShippingDownloadLink"];
-                comboBox1.Items.Add("Shipping (Default)");
-                comboBox1.SelectedItem = "Shipping (Default)";
-            }
-            else { label2.Text = label2.Text + "Not available at current moment"; }
+                var JsSSLAvailability = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/availableSSL", "", ""));
+                if ((bool)JsSSLAvailability["isShippingAvailable"] == true)
+                {
+                    label2.Text = label2.Text + (string)JsSSLAvailability["ShippingDescription"];
+                    Globals.SSL_SHIPPING = (string)JsSSLAvailability["ShippingDownloadLink"];
+                    comboBox1.Items.Add("Shipping (Default)");
+                    comboBox1.SelectedItem = "Shipping (Default)";
+                }
+                else { label2.Text = label2.Text + "Not available at current moment"; }
 
-            if ((bool)JsSSLAvailability["isPTBAvailable"] == true)
-            {
-                label3.Text = label3.Text + (string)JsSSLAvailability["PTBDescription"];
-                Globals.SSL_PTB = (string)JsSSLAvailability["PTBDownloadLink"];
-                comboBox1.Items.Add("PTB (Public Test Build)");
+                if ((bool)JsSSLAvailability["isPTBAvailable"] == true)
+                {
+                    label3.Text = label3.Text + (string)JsSSLAvailability["PTBDescription"];
+                    Globals.SSL_PTB = (string)JsSSLAvailability["PTBDownloadLink"];
+                    comboBox1.Items.Add("PTB (Public Test Build)");
+                }
+                else { label3.Text = label3.Text + "Not available at current moment"; }
             }
-            else { label3.Text = label3.Text + "Not available at current moment"; }
+            catch
+            {
+                label2.Text = label2.Text + "CAN'T ACCESS CURSED MARKET WEB SERVICES";
+                label3.Text = label3.Text + "CAN'T ACCESS CURSED MARKET WEB SERVICES";
+                comboBox1.Visible = false;
+                button4.Visible = false;
+            }
         }
 
         private void CranchPalace_getMarketFile(sbyte isDLConly)
         {
-            switch (isDLConly)
+            try
             {
-                case 0:
-                    Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/marketFile", "isDLConly=false", ""));
-                    break;
-                case 1:
-                    Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/marketFile", "isDLConly=true", ""));
-                    break;
+                if (!File.Exists("Market.json")) // Check if there's no MarketFile in folder with Market, if there is - (else) initialize this file
+                {
+                    switch (isDLConly)
+                    {
+                        case 0:
+                            Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/marketFile", "isDLConly=false", ""));
+                            isMarketFileInitialized = true;
+                            break;
+                        case 1:
+                            Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/marketFile", "isDLConly=true", ""));
+                            isMarketFileInitialized = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("\"Market.json\" file was found near Cursed Market executable, this market file will be initialized...", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    Globals.FIDDLERCORE_VALUE_MARKETFILE = File.ReadAllText("Market.json");
+                    isMarketFileInitialized = true;
+                    isMarketFileLocal = true;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong when program tried to obtain Market File, Stored in program memory offline file will be initialized.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                Globals.FIDDLERCORE_VALUE_MARKETFILE = Properties.Resources.OFFLINERESOURCE_MARKET;
+                isMarketFileInitialized = false;
             }
         }
         private void CranchPalace_getFullProfile()
         {
-            Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
-            button3.Invoke(new Action(() => 
-            {   button3.Text = "START"; 
+            try
+            {
+                Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
+            }
+            catch
+            {
+                MessageBox.Show("Something went wrong when program tried to obtain SaveFile, Stored in program memory offline file will be initialized.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                Globals.FIDDLERCORE_VALUE_FULLPROFILE = Properties.Resources.OFFLINERESOURCE_SAVEFILE;
+            }
+
+            button3.Invoke(new Action(() =>
+            {
+                button3.Text = "START";
                 checkBox1.Visible = true;
                 checkBox2.Visible = true;
                 checkBox3.Visible = true;
@@ -363,7 +415,13 @@ namespace Cursed_Market_Reborn
                 label6.Visible = true;
                 textBox1.Visible = true;
                 button5.Visible = true;
-                button6.Visible = true;
+
+                if (isMarketFileLocal == false)
+                {
+                    button6.Visible = true;
+                    if (isMarketFileInitialized == true)
+                        checkBox5.Enabled = true;
+                }
                 isProgramInitialized = true;
             }));
         }
@@ -446,7 +504,7 @@ namespace Cursed_Market_Reborn
                                 ZipFile.ExtractToDirectory(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip", Globals.REGISTRY_VALUE_PAKFOLDERPATH);
                                 File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
                                 waitform.Close();
-                                MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                                MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                             }
                             else
                             {
@@ -482,8 +540,8 @@ namespace Cursed_Market_Reborn
             else
                 Globals.FIDDLERCORE_BOOL_SILENTFULLPROFILE = false;
 
-            if(isFiddlerCoreActive == true)
-                MessageBox.Show("Changes was made when program is already running... Restart your game to see SaveFile changes.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+            if (isFiddlerCoreActive == true)
+                MessageBox.Show("Changes was made when program is already running... Restart your game to see SaveFile changes.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
@@ -618,7 +676,9 @@ namespace Cursed_Market_Reborn
                 comboBox2.Visible = true;
                 trackBar1.Visible = true;
                 label9.Visible = true;
-            } else {
+            }
+            else
+            {
                 _CROSSHAIR.Hide();
                 comboBox2.Visible = false;
                 trackBar1.Visible = false;

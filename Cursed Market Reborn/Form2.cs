@@ -17,12 +17,12 @@ namespace Cursed_Market_Reborn
         }
         private void Form2_Load(object sender, EventArgs e)
         {
-            if(Globals.REGISTRY_VALUE_PAKFILEPATH != "NONE")
+            if (Globals.REGISTRY_VALUE_PAKFILEPATH != "NONE")
                 textBox1.Text = Globals.REGISTRY_VALUE_PAKFILEPATH;
         }
         private void InitializeSettings()
         {
-            switch(Globals.REGISTRY_VALUE_THEME)
+            switch (Globals.REGISTRY_VALUE_THEME)
             {
                 case "Default":
                     comboBox1.SelectedIndex = 0;
@@ -30,6 +30,7 @@ namespace Cursed_Market_Reborn
                     panel1.BackColor = SystemColors.Control;
                     label1.ForeColor = Color.Black;
                     label2.ForeColor = Color.Black;
+                    label3.ForeColor = Color.Black;
                     break;
 
                 case "Legacy":
@@ -38,6 +39,7 @@ namespace Cursed_Market_Reborn
                     panel1.BackColor = Color.FromArgb(255, 24, 30, 54);
                     label1.ForeColor = Color.White;
                     label2.ForeColor = Color.White;
+                    label3.ForeColor = Color.White;
                     break;
 
                 case "DarkMemories":
@@ -46,6 +48,7 @@ namespace Cursed_Market_Reborn
                     panel1.BackColor = Color.FromArgb(255, 35, 39, 42);
                     label1.ForeColor = Color.White;
                     label2.ForeColor = Color.White;
+                    label3.ForeColor = Color.White;
                     break;
 
                 case "NONE":
@@ -54,6 +57,7 @@ namespace Cursed_Market_Reborn
                     panel1.BackColor = SystemColors.Control;
                     label1.ForeColor = Color.Black;
                     label2.ForeColor = Color.Black;
+                    label3.ForeColor = Color.Black;
                     break;
             }
         }
@@ -124,6 +128,24 @@ namespace Cursed_Market_Reborn
                 }
             }
             catch { }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (FiddlerCore.RemoveRootCertificate() == true)
+                MessageBox.Show("FiddlerCore Certificates successfully deleted from your PC!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+            else
+                MessageBox.Show("Something went wrong when program tried to delete Fiddler Certificates...", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DialogResult settingsresetdialogue = MessageBox.Show("Are you sure that you want to delete all Cursed Market settings from registry?", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+            if (settingsresetdialogue == DialogResult.Yes)
+            {
+                Registry.CurrentUser.DeleteSubKeyTree(Globals.REGISTRY_MAIN.Replace("HKEY_CURRENT_USER\\", ""));
+                Application.Restart();
+            }
         }
     }
 }

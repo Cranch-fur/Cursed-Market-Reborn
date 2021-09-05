@@ -23,6 +23,15 @@ namespace Cursed_Market_Reborn
             }
             return true;
         }
+        public static bool RemoveRootCertificate()
+        {
+            try
+            {
+                CertMaker.removeFiddlerGeneratedCerts(true);
+                return true;
+            }
+            catch { return false; }
+        }
         public static void Start()
         {
             EnsureRootCertificate();

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Win32;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 
@@ -9,7 +10,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3200";
+        public const string PROGRAM_OFFLINEVERSION = "3300";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
@@ -69,7 +70,10 @@ namespace Cursed_Market_Reborn
         {
             if (FIDDLERCORE_VALUE_FULLPROFILE != null)
             {
-                return SaveFile.EncryptSavefile(FIDDLERCORE_VALUE_FULLPROFILE.Replace("CHANGEME_USERID", FIDDLERCORE_VALUE_UID).Replace("CHANGEME_SEASONTICK", Convert.ToString((long)((DateTime.Now.ToUniversalTime() - CurrentNETtimestampstart).TotalMilliseconds + 0.5))));
+                dynamic JsSaveFile = JsonConvert.DeserializeObject(FIDDLERCORE_VALUE_FULLPROFILE);
+                JsSaveFile["playerUId"] = FIDDLERCORE_VALUE_UID;
+                JsSaveFile["currentSeasonTicks"] = (long)((DateTime.Now.ToUniversalTime() - CurrentNETtimestampstart).TotalMilliseconds + 0.5);
+                return SaveFile.EncryptSavefile(JsonConvert.SerializeObject(JsSaveFile, Formatting.None));
             }
             else return null;
         }

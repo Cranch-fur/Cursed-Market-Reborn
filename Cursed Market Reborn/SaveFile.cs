@@ -10,46 +10,49 @@ namespace Cursed_Market_Reborn
 {
     public static class SaveFile
     {
-        private const string SAVEFILE_AESKEY = "5BCC2D6A95D4DF04A005504E59A9B36E";
+        private const string SAVEFILE_AESKEY = "5BCC2D6A95D4DF04A005504E59A9B36E"; // <= SaveFile AES KEY in HEX format
         private const string SAVEFILE_INNER = "DbdDAQEB";
         private const string SAVEFILE_OUTER = "DbdDAgAC";
 
-        public static string EncryptSavefile(string content)
+        public static string EncryptSavefile(string input)
         {
-            byte[] bytes = Encoding.Unicode.GetBytes(content);
-            MemoryStream memoryStream = new MemoryStream();
-            ZOutputStream zoutputStream = new ZOutputStream(memoryStream, -1);
-            zoutputStream.Write(bytes, 0, bytes.Length);
-            zoutputStream.Flush();
-            zoutputStream.Finish();
-            string text = Convert.ToBase64String(PaddingWithNumber(memoryStream.ToArray(), bytes.Length));
-            int num = SAVEFILE_INNER.Length + text.Length;
-            int num2 = 16 - num % 16;
-            text = SAVEFILE_INNER + text.PadRight(text.Length + num2, '\u0001');
-            string text2 = "";
-            string text3 = text;
-            foreach (char c in text3)
+            byte[] input_asbyte = Encoding.Unicode.GetBytes(input);
+            using (MemoryStream memoryStream = new MemoryStream())
             {
-                text2 += (char)(c - '\u0001');
+                using (ZOutputStream zoutputStream = new ZOutputStream(memoryStream, -1))
+                {
+                    zoutputStream.Write(input_asbyte, 0, input_asbyte.Length);
+                    zoutputStream.Flush();
+                }
+
+                string saveFile = Convert.ToBase64String(PaddingWithNumber(memoryStream.ToArray(), input_asbyte.Length));
+                int _pad = 16 - ((SAVEFILE_INNER.Length + saveFile.Length) % 16);
+                saveFile = SAVEFILE_INNER + saveFile.PadRight(saveFile.Length + _pad, '\u0001');
+                string output = null;
+                foreach (char c in saveFile)
+                {
+                    output += (char)(c - '\u0001');
+                }
+                return SAVEFILE_OUTER + Raw_Encrypt(output);
             }
-            return SAVEFILE_OUTER + Raw_Encrypt(text2, SAVEFILE_AESKEY);
         }
 
-        private static string Raw_Encrypt(string text, string key)
+        private static string Raw_Encrypt(string input)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(text);
-            byte[] bytes2 = Encoding.ASCII.GetBytes(key);
+            byte[] input_asbyte = Encoding.UTF8.GetBytes(input);
             ICryptoTransform transform = new RijndaelManaged
             {
                 Mode = CipherMode.ECB,
                 Padding = PaddingMode.Zeros
-            }.CreateEncryptor(bytes2, null);
-            MemoryStream memoryStream = new MemoryStream(bytes);
+            }.CreateEncryptor(Encoding.ASCII.GetBytes(SAVEFILE_AESKEY), null);
+
+
+            MemoryStream memoryStream = new MemoryStream(input_asbyte);
             CryptoStream cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Read);
-            byte[] array = new byte[bytes.Length];
+            byte[] array = new byte[input_asbyte.Length];
             int length = cryptoStream.Read(array, 0, array.Length);
-            memoryStream.Close();
-            cryptoStream.Close();
+            memoryStream.FlushAsync(); memoryStream.Close();
+            cryptoStream.Flush(); cryptoStream.Close();
             return Convert.ToBase64String(array, 0, length);
         }
 
