@@ -61,6 +61,26 @@ namespace Cursed_Market_Reborn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_DEFAULT_CIRCLE {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_DEFAULT_CIRCLE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_DEFAULT_CIRCLE_WHITE {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_DEFAULT_CIRCLE_WHITE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {
@@ -197,6 +217,24 @@ namespace Cursed_Market_Reborn.Properties {
             get {
                 object obj = ResourceManager.GetObject("IMG_LOGO_BIG_WHITE", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;code&quot;:200,&quot;message&quot;:&quot;OK&quot;,&quot;data&quot;:{&quot;playerId&quot;:&quot;OFFLINE Cursed Market 28.08.2021&quot;,&quot;comment&quot;:&quot;Please, respect other people work and don&apos;t forget to mention Cursed Market creator when sharing - Cranch&quot;,&quot;inventory&quot;:[{&quot;lastUpdateAt&quot;:1617205542,&quot;objectId&quot;:&quot;GE_002&quot;,&quot;quantity&quot;:1},{&quot;lastUpdateAt&quot;:1617205542,&quot;objectId&quot;:&quot;GE_001&quot;,&quot;quantity&quot;:1},{&quot;lastUpdateAt&quot;:1617205542,&quot;objectId&quot;:&quot;S28_Legs007&quot;,&quot;quantity&quot;:1},{&quot;lastUpdateAt&quot;:1617205542,&quot;objectId&quot;:&quot;S28_Torso007&quot;,&quot;quantity&quot;:1},{&quot;lastUpdateAt&quot;:1617205542,&quot;objectId&quot;:&quot;S28_He [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OFFLINERESOURCE_MARKET {
+            get {
+                return ResourceManager.GetString("OFFLINERESOURCE_MARKET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {&quot;playerUId&quot;:&quot;NONE&quot;,&quot;selectedCamperIndex&quot;:14,&quot;selectedSlasherIndex&quot;:268435456,&quot;firstTimePlaying&quot;:false,&quot;consecutiveMatchStreak&quot;:1,&quot;currentSeasonTicks&quot;:0,&quot;lastConnectedCharacterIndex&quot;:8,&quot;disconnectPenaltyTime&quot;:&quot;0001-01-01T02:00:00Z&quot;,&quot;lastMatchEndTime&quot;:&quot;2021-06-28T09:01:08.631Z&quot;,&quot;lastMatchStartTime&quot;:&quot;0001-01-01T00:00:00Z&quot;,&quot;lastKillerMatchEndTime&quot;:&quot;0001-01-01T00:00:00Z&quot;,&quot;lastSurvivorMatchEndTime&quot;:&quot;2021-06-28T09:01:08.631Z&quot;,&quot;ongoingGameTime&quot;:&quot;0001-01-01T00:00:00Z&quot;,&quot;cumulativeMatches&quot;:2,&quot;cumulativeMatchesAsSurvi [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string OFFLINERESOURCE_SAVEFILE {
+            get {
+                return ResourceManager.GetString("OFFLINERESOURCE_SAVEFILE", resourceCulture);
             }
         }
     }
