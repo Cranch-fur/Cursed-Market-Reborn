@@ -238,9 +238,9 @@ namespace Cursed_Market_Reborn
             this.checkBox1.Font = new System.Drawing.Font("Roboto", 9F);
             this.checkBox1.Location = new System.Drawing.Point(100, 360);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(169, 18);
+            this.checkBox1.Size = new System.Drawing.Size(170, 18);
             this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "Disable Ingame Chat Filter";
+            this.checkBox1.Text = "Disable Matches With Bots";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.Visible = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
@@ -264,9 +264,9 @@ namespace Cursed_Market_Reborn
             this.checkBox3.Font = new System.Drawing.Font("Roboto", 9F);
             this.checkBox3.Location = new System.Drawing.Point(100, 340);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(74, 18);
+            this.checkBox3.Size = new System.Drawing.Size(151, 18);
             this.checkBox3.TabIndex = 16;
-            this.checkBox3.Text = "Queue UI";
+            this.checkBox3.Text = "Queue Position Overlay";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.Visible = false;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
@@ -554,7 +554,10 @@ namespace Cursed_Market_Reborn
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Items.AddRange(new object[] {
             "Circle (Black)",
-            "Circle (White)"});
+            "Circle (White)",
+            "Dot (Red)",
+            "Dot (Yellow)",
+            "Dot (Green)"});
             this.comboBox2.Location = new System.Drawing.Point(178, 457);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(97, 21);

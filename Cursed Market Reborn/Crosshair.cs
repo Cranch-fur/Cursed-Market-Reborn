@@ -48,6 +48,24 @@ namespace Cursed_Market_Reborn
                     this.TransparencyKey = this.BackColor;
                     break;
 
+                case "Dot (Red)":
+                    pictureBox1.Image = Properties.Resources.CROSSHAIR_DEFAULT_DOT_RED;
+                    this.BackColor = Color.DarkRed;
+                    this.TransparencyKey = this.BackColor;
+                    break;
+
+                case "Dot (Yellow)":
+                    pictureBox1.Image = Properties.Resources.CROSSHAIR_DEFAULT_DOT_YELLOW;
+                    this.BackColor = Color.FromArgb(255, 215, 209, 46);
+                    this.TransparencyKey = this.BackColor;
+                    break;
+
+                case "Dot (Green)":
+                    pictureBox1.Image = Properties.Resources.CROSSHAIR_DEFAULT_DOT_GREEN;
+                    this.BackColor = Color.DarkGreen;
+                    this.TransparencyKey = this.BackColor;
+                    break;
+
                 default:
                     pictureBox1.Image = Properties.Resources.CROSSHAIR_DEFAULT_CIRCLE;
                     this.BackColor = Color.FromArgb(255, 40, 40, 40);

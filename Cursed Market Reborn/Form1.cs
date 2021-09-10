@@ -218,17 +218,26 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => Trackers
         private async void TRACK_QUEUE()
         {
+            //    === LENGTH TABLE ===
+            //        4 / 20 = NONE
+            //        6 / 22 = QUEUED
+            //        7 / 23 = MATCHED
+
             try
             {
                 await Task.Run(() =>
                 {
                     while (true)
                     {
-                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE" || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "MATCHED")
+                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE" || (label5.Text.Length == 23 && Globals.FIDDLERCORE_VALUE_QUEUEPOSITION.Length == 7))
                             label5.Invoke(new Action(() => { label5.Text = "QUEUE POSITION: NONE"; }));
                         else
-                            label5.Invoke(new Action(() => { label5.Text = $"QUEUE POSITION: {Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION()}"; }));
-
+                        {
+                            if (label5.Text.Length == 20 && Globals.FIDDLERCORE_VALUE_QUEUEPOSITION.Length == 7)
+                                label5.Invoke(new Action(() => { label5.Text = "QUEUE POSITION: NONE"; }));
+                            else
+                                label5.Invoke(new Action(() => { label5.Text = $"QUEUE POSITION: {Globals.FIDDLERCORE_VALUE_QUEUEPOSITION}"; }));
+                        }
                         Thread.Sleep(2500);
                     }
 
@@ -487,11 +496,13 @@ namespace Cursed_Market_Reborn
                     }
                     else
                     {
-                        if(File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
+                        if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
                         {
                             File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
                             button4.PerformClick();
-                        } else {
+                        }
+                        else
+                        {
                             MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
                             return;
                         }
@@ -547,9 +558,9 @@ namespace Cursed_Market_Reborn
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox1.Checked == true)
-                Globals.FIDDLERCORE_BOOL_ANTICHATFILTER = true;
+                Globals.FIDDLERCORE_BOOL_ANTIBOTMATCH = true;
             else
-                Globals.FIDDLERCORE_BOOL_ANTICHATFILTER = false;
+                Globals.FIDDLERCORE_BOOL_ANTIBOTMATCH = false;
         }
 
         private void checkBox2_CheckedChanged(object sender, EventArgs e)

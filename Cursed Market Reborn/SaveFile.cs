@@ -36,25 +36,6 @@ namespace Cursed_Market_Reborn
                 return SAVEFILE_OUTER + Raw_Encrypt(output);
             }
         }
-
-        private static string Raw_Decrypt(string text)
-        {
-            byte[] input_asbyte = Convert.FromBase64String(text);
-            ICryptoTransform transform = new RijndaelManaged
-            {
-                Mode = CipherMode.ECB,
-                Padding = PaddingMode.Zeros
-            }.CreateDecryptor(Encoding.ASCII.GetBytes(SAVEFILE_AESKEY), null);
-
-
-            MemoryStream memoryStream = new MemoryStream(input_asbyte);
-            CryptoStream cryptoStream = new CryptoStream(memoryStream, transform, CryptoStreamMode.Read);
-            byte[] array = new byte[input_asbyte.Length];
-            int length = cryptoStream.Read(array, 0, array.Length);
-            memoryStream.FlushAsync(); memoryStream.Close();
-            cryptoStream.Flush(); cryptoStream.Close();
-            return Encoding.UTF8.GetString(array, 0, length);
-        }
         private static string Raw_Encrypt(string input)
         {
             byte[] input_asbyte = Encoding.UTF8.GetBytes(input);
@@ -73,6 +54,7 @@ namespace Cursed_Market_Reborn
             cryptoStream.Flush(); cryptoStream.Close();
             return Convert.ToBase64String(array, 0, length);
         }
+
 
         private static byte[] PaddingWithNumber(byte[] buffer, int num)
         {

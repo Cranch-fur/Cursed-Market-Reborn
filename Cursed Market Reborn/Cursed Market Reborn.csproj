@@ -166,5 +166,14 @@
   <ItemGroup>
     <None Include="Resources\CROSSHAIR_DEFAULT_CIRCLE_WHITE.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_DEFAULT_DOT_RED.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_DEFAULT_DOT_YELLOW.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_DEFAULT_DOT_GREEN.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

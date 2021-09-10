@@ -10,7 +10,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3301";
+        public const string PROGRAM_OFFLINEVERSION = "3400";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
@@ -36,14 +36,14 @@ namespace Cursed_Market_Reborn
         public static string FIDDLERCORE_VALUE_MARKETFILE = null;
         public static string FIDDLERCORE_VALUE_FULLPROFILE = null;
         public static string FIDDLERCORE_VALUE_BHVRSESSION = null;
-        public static string FIDDLERCORE_VALUE_QUEUEPOSITION = null;
+        public static string FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
         public static string FIDDLERCORE_VALUE_ONLINELOBBY_ID = null;
         public static string FIDDLERCORE_VALUE_UID = null;
-        public static string FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION()
+        public static string FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(string input)
         {
             if (FIDDLERCORE_VALUE_QUEUEPOSITION != null)
             {
-                var JsQueueResponse = JObject.Parse(FIDDLERCORE_VALUE_QUEUEPOSITION);
+                var JsQueueResponse = JObject.Parse(input);
                 if ((string)JsQueueResponse["status"] == "QUEUED")
                     return (string)JsQueueResponse["queueData"]["position"];
                 else if ((string)JsQueueResponse["status"] == "MATCHED")
@@ -79,7 +79,7 @@ namespace Cursed_Market_Reborn
         }
 
         public static bool FIDDLERCORE_BOOL_SILENTFULLPROFILE = false;
-        public static bool FIDDLERCORE_BOOL_ANTICHATFILTER = false;
+        public static bool FIDDLERCORE_BOOL_ANTIBOTMATCH = false;
         public static bool FIDDLERCORE_BOOL_CURRENCYSPOOF = false;
         public static bool FIDDLERCORE_BOOL_FREEBLOODWEB = false;
         public static string FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS = null;
