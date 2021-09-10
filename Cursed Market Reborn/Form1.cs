@@ -33,6 +33,7 @@ namespace Cursed_Market_Reborn
         {
             if (win.Msg == 0x11)
             {
+                Globals.DisableProxy();
                 MessageBox.Show("Cursed Market must be closed before shut downing PC.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
             }
             base.WndProc(ref win);
@@ -223,7 +224,7 @@ namespace Cursed_Market_Reborn
                 {
                     while (true)
                     {
-                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE")
+                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE" || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "MATCHED")
                             label5.Invoke(new Action(() => { label5.Text = "QUEUE POSITION: NONE"; }));
                         else
                             label5.Invoke(new Action(() => { label5.Text = $"QUEUE POSITION: {Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION()}"; }));
@@ -472,20 +473,28 @@ namespace Cursed_Market_Reborn
                                 File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
                                 waitform.Close();
                                 MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                                return;
                             }
                             else
                             {
                                 waitform.Close();
                                 File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
-                                MessageBox.Show("Cursed Market can't access SSL Bypass file, please,\nmake sure your Ethernet connection is stable & firewall is disabled. If nothings helps something went wrong with SSL Bypass file, better to contact with Cursed Market developer.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                                MessageBox.Show("Cursed Market can't access SSL Bypass file in AUTO mode, SSL bypass will be downloaded manually after you press OK", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                                Process.Start(Globals.SSL_SHIPPING);
                                 return;
                             }
                         });
                     }
                     else
                     {
-                        MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                        return;
+                        if(File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
+                        {
+                            File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
+                            button4.PerformClick();
+                        } else {
+                            MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                            return;
+                        }
                     }
                 }
                 else
@@ -505,20 +514,30 @@ namespace Cursed_Market_Reborn
                                 File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
                                 waitform.Close();
                                 MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                                return;
                             }
                             else
                             {
                                 waitform.Close();
                                 File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
-                                MessageBox.Show("Cursed Market can't access SSL Bypass file, please,\nmake sure your Ethernet connection is stable & firewall is disabled. If nothings helps something went wrong with SSL Bypass file, better to contact with Cursed Market developer.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                                MessageBox.Show("Cursed Market can't access SSL Bypass file in AUTO mode, manual SSL bypass download will be started after you press OK", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                                Process.Start(Globals.SSL_PTB);
                                 return;
                             }
                         });
                     }
                     else
                     {
-                        MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                        return;
+                        if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
+                        {
+                            File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
+                            button4.PerformClick();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+                            return;
+                        }
                     }
                 }
             }

@@ -74,7 +74,7 @@ namespace Cursed_Market_Reborn
                 {
                     while (true)
                     {
-                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE")
+                        if (Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == null || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "NONE" || Globals.FIDDLERCORE_VALUE_QUEUEPOSITION == "MATCHED")
                             label1.Invoke(new Action(() => { label1.Text = ""; }));
                         else
                             label1.Invoke(new Action(() => { label1.Text = Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(); }));

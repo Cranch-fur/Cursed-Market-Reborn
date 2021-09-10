@@ -147,5 +147,11 @@ namespace Cursed_Market_Reborn
                 Application.Restart();
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            Globals.DisableProxy();
+            Application.Restart();
+        }
     }
 }

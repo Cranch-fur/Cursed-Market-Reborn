@@ -1,5 +1,4 @@
 ﻿using Fiddler;
-using System;
 
 namespace Cursed_Market_Reborn
 {
@@ -9,6 +8,7 @@ namespace Cursed_Market_Reborn
         {
             FiddlerApplication.BeforeRequest += FiddlerToCatchBeforeRequest;
             FiddlerApplication.AfterSessionComplete += FiddlerToCatchAfterSessionComplete;
+            FiddlerApplication.ResetSessionCounter();
         }
         private static bool EnsureRootCertificate()
         {
@@ -41,11 +41,7 @@ namespace Cursed_Market_Reborn
         public static void Stop()
         {
             FiddlerApplication.Shutdown();
-            try
-            {
-                string registrykey = @"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Internet Settings";
-                Microsoft.Win32.Registry.SetValue(registrykey, "ProxyEnable", 0);
-            } catch { }
+            Globals.DisableProxy();
         }
         public static void FiddlerToCatchBeforeRequest(Session oSession)
         {
@@ -69,6 +65,7 @@ namespace Cursed_Market_Reborn
                 if (oSession.uriContains("api/v1/profanityfilter/sanitizer/message"))
                 {
                     oSession.fullUrl = "http://api.dragonwild.ru/v1/fuckFilter";
+                    return;
                 }
             }
             if (Globals.FIDDLERCORE_BOOL_SILENTFULLPROFILE == true)
@@ -80,11 +77,13 @@ namespace Cursed_Market_Reborn
                     oSession.oResponse["Kraken-State-Version"] = "1";
                     oSession.oResponse["Kraken-State-Schema-Version"] = "0";
                     oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUETRANSFER_FULLPROFILE());
+                    return;
                 }
                 if (oSession.uriContains("api/v1/players/me/states/binary?schemaVersion"))
                 {
                     oSession.utilCreateResponseAndBypassServer();
                     oSession.utilSetResponseBody("{\"version\":1,\"stateName\":\"FullProfile\",\"schemaVersion\":0,\"playerId\":\"0cfddbd9-4738-d130-aa5e-6e4f165b4440\"}");
+                    return;
                 }
             }
             if (Globals.FIDDLERCORE_BOOL_CURRENCYSPOOF == true)
@@ -93,6 +92,7 @@ namespace Cursed_Market_Reborn
                 {
                     oSession.utilCreateResponseAndBypassServer();
                     oSession.utilSetResponseBody("{\"list\":[{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS + ",\"currency\":\"Shards\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS + ",\"currency\":\"Cells\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS + ",\"currency\":\"BonusBloodpoints\"},{\"balance\":0,\"currency\":\"Bloodpoints\"}]}");
+                    return;
                 }
             }
             if (Globals.FIDDLERCORE_BOOL_FREEBLOODWEB == true)
@@ -101,6 +101,7 @@ namespace Cursed_Market_Reborn
                 {
                     oSession.utilCreateResponseAndBypassServer();
                     oSession.utilSetResponseBody("{\"userId\":\"null\",\"balance\":0,\"currency\":\"USCents\"}");
+                    return;
                 }
             }
         }
@@ -110,15 +111,18 @@ namespace Cursed_Market_Reborn
             {
                 oSession.utilDecodeResponse();
                 Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes);
+                return;
             }
             if (oSession.uriContains("api/v1/match"))
             {
                 oSession.utilDecodeResponse();
                 Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = null;
+                return;
             }
             if (oSession.uriContains("api/v1/auth/provider/steam/login?token="))
             {
                 Globals.FIDDLERCORE_VALUE_UID = Globals.FIDDLERCORE_VALUETRANSFER_UID(oSession.url.ToString());
+                return;
             }
         }
     }
