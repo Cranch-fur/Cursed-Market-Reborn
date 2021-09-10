@@ -124,6 +124,15 @@
   <data name="CROSSHAIR_DEFAULT_CIRCLE_WHITE" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\CROSSHAIR_DEFAULT_CIRCLE_WHITE.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="CROSSHAIR_DEFAULT_DOT_GREEN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CROSSHAIR_DEFAULT_DOT_GREEN.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CROSSHAIR_DEFAULT_DOT_RED" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CROSSHAIR_DEFAULT_DOT_RED.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="CROSSHAIR_DEFAULT_DOT_YELLOW" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\CROSSHAIR_DEFAULT_DOT_YELLOW.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

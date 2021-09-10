@@ -81,6 +81,36 @@ namespace Cursed_Market_Reborn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_DEFAULT_DOT_GREEN {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_DEFAULT_DOT_GREEN", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_DEFAULT_DOT_RED {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_DEFAULT_DOT_RED", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_DEFAULT_DOT_YELLOW {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_DEFAULT_DOT_YELLOW", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {
