@@ -557,7 +557,9 @@ namespace Cursed_Market_Reborn
             "Circle (White)",
             "Dot (Red)",
             "Dot (Yellow)",
-            "Dot (Green)"});
+            "Dot (Green)",
+            "Tactic (Black)",
+            "Tactic (White)"});
             this.comboBox2.Location = new System.Drawing.Point(178, 457);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(97, 21);

@@ -66,6 +66,18 @@ namespace Cursed_Market_Reborn
                     this.TransparencyKey = this.BackColor;
                     break;
 
+                case "Tactic (Black)":
+                    pictureBox1.Image = Properties.Resources.CROSSHAIR_TACTIC_01;
+                    this.BackColor = Color.FromArgb(255, 40, 40, 40);
+                    this.TransparencyKey = this.BackColor;
+                    break;
+
+                case "Tactic (White)":
+                    pictureBox1.Image = Properties.Resources.CROSSHAIR_TACTIC_01_WHITE;
+                    this.BackColor = Color.FromArgb(255, 100, 100, 100);
+                    this.TransparencyKey = this.BackColor;
+                    break;
+
                 default:
                     pictureBox1.Image = Properties.Resources.CROSSHAIR_DEFAULT_CIRCLE;
                     this.BackColor = Color.FromArgb(255, 40, 40, 40);

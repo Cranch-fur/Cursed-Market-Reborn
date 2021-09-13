@@ -111,6 +111,26 @@ namespace Cursed_Market_Reborn.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_TACTIC_01 {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_TACTIC_01", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap CROSSHAIR_TACTIC_01_WHITE {
+            get {
+                object obj = ResourceManager.GetObject("CROSSHAIR_TACTIC_01_WHITE", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon icon {

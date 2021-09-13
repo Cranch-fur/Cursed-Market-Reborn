@@ -175,5 +175,11 @@
   <ItemGroup>
     <None Include="Resources\CROSSHAIR_DEFAULT_DOT_GREEN.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_TACTIC_01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CROSSHAIR_TACTIC_01_WHITE.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

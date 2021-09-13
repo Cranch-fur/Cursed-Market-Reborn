@@ -54,6 +54,11 @@ namespace Cursed_Market_Reborn
                     label1.BackColor = Color.FromArgb(255, 44, 47, 51);
                     break;
 
+                case "SaintsInaRow":
+                    label1.ForeColor = Color.FromArgb(255, 146, 71, 214);
+                    label1.BackColor = Color.FromArgb(255, 37, 13, 57);
+                    break;
+
                 default:
                     label1.ForeColor = Color.Black;
                     label1.BackColor = Color.WhiteSmoke;

@@ -16,7 +16,7 @@ namespace Cursed_Market_Reborn
                     URL = URL + $"?{variable2}";
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
-                request.Timeout = 5000;
+                request.Timeout = 7000;
                 request.ServicePoint.Expect100Continue = true;
 
                 request.UserAgent = "Cursed Market";
@@ -39,7 +39,7 @@ namespace Cursed_Market_Reborn
                     URL = URL + $"?{variable}";
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
-                request.Timeout = 5000;
+                request.Timeout = 7000;
                 request.ServicePoint.Expect100Continue = true;
 
                 if (useragent != "")

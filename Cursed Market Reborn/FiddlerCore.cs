@@ -116,18 +116,20 @@ namespace Cursed_Market_Reborn
             {
                 if (oSession.uriContains("api/v1/queue"))
                 {
-                    if (oSession.uriContains("/cancel"))
-                        Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
-                    else
+                    try
                     {
-                        oSession.utilDecodeResponse();
-                        Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes));
-                    }
-                    return;
+                        if (oSession.uriContains("/cancel"))
+                            Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
+                        else
+                        {
+                            oSession.utilDecodeResponse();
+                            Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes));
+                        }
+                        return;
+                    } catch { Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE"; return; }
                 }
                 if (oSession.uriContains("api/v1/match"))
                 {
-                    oSession.utilDecodeResponse();
                     Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "MATCHED";
                     return;
                 }

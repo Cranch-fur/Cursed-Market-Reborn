@@ -180,6 +180,38 @@ namespace Cursed_Market_Reborn
                         button8.BackColor = Color.FromArgb(255, 85, 85, 85);
                         break;
 
+                    case "SaintsInaRow":
+                        Globals.INITIALIZEDTHEME = 3;
+                        pictureBox5.Visible = false;
+                        pictureBox1.Image = Properties.Resources.IMG_LOGO_BIG_WHITE;
+                        pictureBox2.Image = Properties.Resources.ICON_SMALL_SETTINGS_WHITE;
+                        this.BackColor = Color.FromArgb(255, 37, 13, 57);
+                        panel1.BackColor = Color.FromArgb(255, 55, 20, 86);
+                        label1.ForeColor = Color.White;
+                        label2.ForeColor = Color.White;
+                        label3.ForeColor = Color.White;
+                        label4.ForeColor = Color.White;
+                        label5.ForeColor = Color.White;
+                        label6.ForeColor = Color.White;
+                        label7.ForeColor = Color.White;
+                        label9.ForeColor = Color.White;
+                        label8.ForeColor = Color.DimGray;
+                        checkBox1.ForeColor = Color.White;
+                        checkBox2.ForeColor = Color.White;
+                        checkBox3.ForeColor = Color.White;
+                        checkBox4.ForeColor = Color.White;
+                        checkBox5.ForeColor = Color.White;
+                        checkBox6.ForeColor = Color.White;
+                        checkBox7.ForeColor = Color.White;
+                        button3.BackColor = Color.FromArgb(255, 89, 67, 218);
+                        button3.ForeColor = Color.White;
+                        button4.BackColor = Color.FromArgb(255, 118, 93, 222);
+                        button5.BackColor = Color.FromArgb(255, 118, 93, 222);
+                        button6.BackColor = Color.FromArgb(255, 118, 93, 222);
+                        button7.BackColor = Color.SlateBlue;
+                        button8.BackColor = Color.FromArgb(255, 118, 93, 222);
+                        break;
+
                     default:
                         Globals.INITIALIZEDTHEME = 0;
                         pictureBox1.Image = Properties.Resources.IMG_LOGO_BIG_BLACK;
