@@ -71,6 +71,7 @@ namespace Cursed_Market_Reborn
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label9 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -562,7 +563,7 @@ namespace Cursed_Market_Reborn
             "Tactic (White)"});
             this.comboBox2.Location = new System.Drawing.Point(178, 457);
             this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(97, 21);
+            this.comboBox2.Size = new System.Drawing.Size(103, 21);
             this.comboBox2.TabIndex = 36;
             this.comboBox2.Visible = false;
             this.comboBox2.SelectedValueChanged += new System.EventHandler(this.comboBox2_SelectedValueChanged);
@@ -592,12 +593,29 @@ namespace Cursed_Market_Reborn
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.label9.Visible = false;
             // 
+            // button9
+            // 
+            this.button9.BackColor = System.Drawing.Color.DimGray;
+            this.button9.FlatAppearance.BorderSize = 0;
+            this.button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button9.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button9.ForeColor = System.Drawing.Color.White;
+            this.button9.Location = new System.Drawing.Point(218, 484);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(63, 20);
+            this.button9.TabIndex = 40;
+            this.button9.Text = "SAVEFILE";
+            this.button9.UseVisualStyleBackColor = false;
+            this.button9.Visible = false;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(659, 563);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.trackBar1);
             this.Controls.Add(this.comboBox2);
@@ -701,6 +719,7 @@ namespace Cursed_Market_Reborn
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button9;
     }
 }
 

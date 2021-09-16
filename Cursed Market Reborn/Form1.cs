@@ -27,6 +27,7 @@ namespace Cursed_Market_Reborn
         static bool isFiddlerCoreActive = false;
         static bool isMarketFileInitialized = false;
         static bool isMarketFileLocal = false;
+        static bool isSaveFileLocal = false;
 
 
         protected override void WndProc(ref Message win)
@@ -114,6 +115,7 @@ namespace Cursed_Market_Reborn
                         button6.BackColor = Color.DimGray;
                         button7.BackColor = Color.DarkGray;
                         button8.BackColor = Color.DimGray;
+                        button9.BackColor = Color.DimGray;
                         break;
 
                     case "Legacy":
@@ -146,6 +148,7 @@ namespace Cursed_Market_Reborn
                         button6.BackColor = Color.RoyalBlue;
                         button7.BackColor = Color.SlateBlue;
                         button8.BackColor = Color.RoyalBlue;
+                        button9.BackColor = Color.RoyalBlue;
                         break;
 
                     case "DarkMemories":
@@ -178,6 +181,7 @@ namespace Cursed_Market_Reborn
                         button6.BackColor = Color.FromArgb(255, 85, 85, 85);
                         button7.BackColor = Color.SlateBlue;
                         button8.BackColor = Color.FromArgb(255, 85, 85, 85);
+                        button9.BackColor = Color.FromArgb(255, 85, 85, 85);
                         break;
 
                     case "SaintsInaRow":
@@ -210,6 +214,7 @@ namespace Cursed_Market_Reborn
                         button6.BackColor = Color.FromArgb(255, 118, 93, 222);
                         button7.BackColor = Color.SlateBlue;
                         button8.BackColor = Color.FromArgb(255, 118, 93, 222);
+                        button9.BackColor = Color.FromArgb(255, 118, 93, 222);
                         break;
 
                     default:
@@ -241,6 +246,7 @@ namespace Cursed_Market_Reborn
                         button6.BackColor = Color.DimGray;
                         button7.BackColor = Color.DarkGray;
                         button8.BackColor = Color.DimGray;
+                        button9.BackColor = Color.DimGray;
                         break;
                 }
             }
@@ -435,7 +441,16 @@ namespace Cursed_Market_Reborn
         {
             try
             {
-                Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
+                if (!File.Exists("SaveFile.txt")) // Check if there's no SaveFile in folder with Market, if there is - (else) initialize this file
+                {
+                    Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
+                }
+                else
+                {
+                    MessageBox.Show("\"SaveFile.txt\" file was found near Cursed Market executable, this fullprofile file will be initialized...", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                    Globals.FIDDLERCORE_VALUE_FULLPROFILE = File.ReadAllText("SaveFile.txt");
+                    isSaveFileLocal = true;
+                }
             }
             catch
             {
@@ -464,6 +479,11 @@ namespace Cursed_Market_Reborn
                     if (isMarketFileInitialized == true)
                         checkBox5.Enabled = true;
                 }
+                if (isSaveFileLocal == false)
+                {
+                    button9.Visible = true;
+                }
+
                 isProgramInitialized = true;
             }));
         }
@@ -768,6 +788,27 @@ namespace Cursed_Market_Reborn
                 Globals.CROSSHAIR_VALUE_OPACITY = trackBar1.Value;
                 label9.Text = Convert.ToString(trackBar1.Value * 10) + "%";
             }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            if (Globals.FIDDLERCORE_VALUE_FULLPROFILE != null)
+            {
+                using (SaveFileDialog exportMarketFile = new SaveFileDialog())
+                {
+                    exportMarketFile.InitialDirectory = Environment.CurrentDirectory;
+                    exportMarketFile.FilterIndex = 1; exportMarketFile.RestoreDirectory = true;
+                    exportMarketFile.FileName = "SaveFile.txt";
+                    if (exportMarketFile.ShowDialog() == DialogResult.OK)
+                    {
+                        File.WriteAllText(exportMarketFile.FileName, Globals.FIDDLERCORE_VALUE_FULLPROFILE);
+                    }
+                    else
+                        return;
+                }
+            }
+            else
+                MessageBox.Show("Please, wait for SaveFile to initialize before exporting it.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
         }
     }
 }

@@ -122,6 +122,9 @@ namespace Cursed_Market_Reborn
                             Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
                         else
                         {
+                            if(Overlay.IsMatchFound)
+                                Overlay.IsMatchFound = false;
+
                             oSession.utilDecodeResponse();
                             Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = Globals.FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes));
                         }
@@ -131,6 +134,9 @@ namespace Cursed_Market_Reborn
                 if (oSession.uriContains("api/v1/match"))
                 {
                     Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "MATCHED";
+                    oSession.utilDecodeResponse();
+                    Globals.FIDDLERCORE_VALUE_MMR = Globals.FIDDLERCORE_VALUETRANSFER_MMR(System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes));
+
                     return;
                 }
                 if (oSession.uriContains("api/v1/auth/provider/steam/login?token="))

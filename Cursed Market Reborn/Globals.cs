@@ -10,7 +10,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3401";
+        public const string PROGRAM_OFFLINEVERSION = "3500";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
@@ -37,6 +37,7 @@ namespace Cursed_Market_Reborn
         public static string FIDDLERCORE_VALUE_FULLPROFILE = null;
         public static string FIDDLERCORE_VALUE_BHVRSESSION = null;
         public static string FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
+        public static string FIDDLERCORE_VALUE_MMR = string.Empty;
         public static string FIDDLERCORE_VALUE_ONLINELOBBY_ID = null;
         public static string FIDDLERCORE_VALUE_UID = null;
         public static string FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(string input)
@@ -49,12 +50,25 @@ namespace Cursed_Market_Reborn
                 else if ((string)JsQueueResponse["status"] == "MATCHED")
                 {
                     FIDDLERCORE_VALUE_ONLINELOBBY_ID = (string)JsQueueResponse["matchData"]["matchId"];
+                    Overlay.IsMMRObtained = false;
                     return "MATCHED";
                 }
                 else
                     return "NONE";
             }
             else return "NONE";
+        }
+        public static string FIDDLERCORE_VALUETRANSFER_MMR(string input)
+        {
+            if (FIDDLERCORE_VALUE_MMR != null)
+            {
+                var JsMatchResponse = JObject.Parse(input);
+                if ((float)JsMatchResponse["skill"]["rating"]["rating"] > 0)
+                    return Convert.ToString(Convert.ToInt32((float)JsMatchResponse["skill"]["rating"]["rating"]));
+                else
+                    return "NONEVALUE";
+            }
+            else return "NONEVALUE";
         }
         public static string FIDDLERCORE_VALUETRANSFER_UID(string input)
         {
