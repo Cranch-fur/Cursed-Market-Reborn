@@ -23,7 +23,7 @@ namespace Cursed_Market_Reborn
             this.Width = Screen.PrimaryScreen.Bounds.Width;
             this.Height = Screen.PrimaryScreen.Bounds.Height;
             label1.Location = new Point(this.Width / 128, this.Height / 128);
-            label2.Location = new Point(Convert.ToInt32(this.Width / 1.03), this.Height / 128);
+            label2.Location = new Point(this.Width / 2, this.Height / 128);
         }
 
         public static bool IsMatchFound = false;

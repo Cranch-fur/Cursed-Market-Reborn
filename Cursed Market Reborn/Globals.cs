@@ -10,7 +10,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3500";
+        public const string PROGRAM_OFFLINEVERSION = "3601";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
@@ -34,6 +34,7 @@ namespace Cursed_Market_Reborn
 
         public static string FIDDLERCORE_VALUE_PLATFORM = null;
         public static string FIDDLERCORE_VALUE_MARKETFILE = null;
+        public static string FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL = null;
         public static string FIDDLERCORE_VALUE_FULLPROFILE = null;
         public static string FIDDLERCORE_VALUE_BHVRSESSION = null;
         public static string FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
@@ -92,6 +93,7 @@ namespace Cursed_Market_Reborn
             else return null;
         }
 
+        public static bool FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED = false;
         public static bool FIDDLERCORE_BOOL_SILENTFULLPROFILE = false;
         public static bool FIDDLERCORE_BOOL_ANTIBOTMATCH = false;
         public static bool FIDDLERCORE_BOOL_CURRENCYSPOOF = false;

@@ -45,7 +45,7 @@ namespace Cursed_Market_Reborn
         }
         public static void FiddlerToCatchBeforeRequest(Session oSession)
         {
-            if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com")
+            if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com" || oSession.hostname == "cdn.live.dbd.bhvronline.com" || oSession.hostname == "latest.ptb.bhvrdbd.com" || oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
             {
                 if (oSession.uriContains("api/v1/config"))
                 {
@@ -104,6 +104,15 @@ namespace Cursed_Market_Reborn
                     {
                         oSession.utilCreateResponseAndBypassServer();
                         oSession.utilSetResponseBody("{\"userId\":\"null\",\"balance\":0,\"currency\":\"USCents\"}");
+                        return;
+                    }
+                }
+                if (Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED == true)
+                {
+                    if (oSession.uriContains ("catalog.json"))
+                    {
+                        oSession.utilCreateResponseAndBypassServer();
+                        oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL);
                         return;
                     }
                 }

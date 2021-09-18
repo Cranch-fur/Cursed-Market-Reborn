@@ -369,6 +369,12 @@ namespace Cursed_Market_Reborn
                             this.Close();
                     }
                 }
+
+                if((bool)JsVersionCheck["isAdvancedSkinControlEnabled"] == true)
+                {
+                    Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/advancedSkinsControl", string.Empty, string.Empty);
+                    Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED = true;
+                }
             }
             catch { }
         }
