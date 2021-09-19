@@ -72,6 +72,8 @@ namespace Cursed_Market_Reborn
             this.trackBar1 = new System.Windows.Forms.TrackBar();
             this.label9 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
@@ -423,7 +425,7 @@ namespace Cursed_Market_Reborn
             this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox4.Location = new System.Drawing.Point(80, 300);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(499, 218);
+            this.pictureBox4.Size = new System.Drawing.Size(499, 238);
             this.pictureBox4.TabIndex = 11;
             this.pictureBox4.TabStop = false;
             // 
@@ -462,7 +464,7 @@ namespace Cursed_Market_Reborn
             this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox5.Location = new System.Drawing.Point(0, 0);
             this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(659, 563);
+            this.pictureBox5.Size = new System.Drawing.Size(659, 583);
             this.pictureBox5.TabIndex = 20;
             this.pictureBox5.TabStop = false;
             // 
@@ -487,7 +489,7 @@ namespace Cursed_Market_Reborn
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label8.ForeColor = System.Drawing.Color.Gainsboro;
-            this.label8.Location = new System.Drawing.Point(113, 521);
+            this.label8.Location = new System.Drawing.Point(113, 541);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(432, 13);
             this.label8.TabIndex = 31;
@@ -609,12 +611,43 @@ namespace Cursed_Market_Reborn
             this.button9.Visible = false;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "DEFAULT",
+            "The Withering Blight (Halloween 2019 Event)",
+            "Winter Solstice (Winter 2019 Event)",
+            "The Eternal Blight (Halloween 2020 Event)",
+            "Gilded Stampede (Lunar 2021 Event)"});
+            this.comboBox3.Location = new System.Drawing.Point(232, 509);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(269, 21);
+            this.comboBox3.TabIndex = 41;
+            this.comboBox3.Visible = false;
+            this.comboBox3.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Roboto", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label10.Location = new System.Drawing.Point(97, 511);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(131, 17);
+            this.label10.TabIndex = 42;
+            this.label10.Text = "SEASON MANAGER ➤";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label10.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(659, 563);
+            this.ClientSize = new System.Drawing.Size(659, 583);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.trackBar1);
@@ -720,6 +753,8 @@ namespace Cursed_Market_Reborn
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label10;
     }
 }
 

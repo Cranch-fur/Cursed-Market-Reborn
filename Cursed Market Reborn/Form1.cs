@@ -28,6 +28,7 @@ namespace Cursed_Market_Reborn
         static bool isMarketFileInitialized = false;
         static bool isMarketFileLocal = false;
         static bool isSaveFileLocal = false;
+        static bool isSeasonManagerOnline = false;
 
 
         protected override void WndProc(ref Message win)
@@ -101,6 +102,7 @@ namespace Cursed_Market_Reborn
                         label7.ForeColor = Color.Black;
                         label8.ForeColor = Color.Gainsboro;
                         label9.ForeColor = Color.Black;
+                        label10.ForeColor = Color.Black;
                         checkBox1.ForeColor = Color.Black;
                         checkBox2.ForeColor = Color.Black;
                         checkBox3.ForeColor = Color.Black;
@@ -134,6 +136,7 @@ namespace Cursed_Market_Reborn
                         label7.ForeColor = Color.White;
                         label8.ForeColor = Color.DimGray;
                         label9.ForeColor = Color.White;
+                        label10.ForeColor = Color.White;
                         checkBox1.ForeColor = Color.White;
                         checkBox2.ForeColor = Color.White;
                         checkBox3.ForeColor = Color.White;
@@ -165,8 +168,9 @@ namespace Cursed_Market_Reborn
                         label5.ForeColor = Color.White;
                         label6.ForeColor = Color.White;
                         label7.ForeColor = Color.White;
-                        label9.ForeColor = Color.White;
                         label8.ForeColor = Color.DimGray;
+                        label9.ForeColor = Color.White;
+                        label10.ForeColor = Color.White;
                         checkBox1.ForeColor = Color.White;
                         checkBox2.ForeColor = Color.White;
                         checkBox3.ForeColor = Color.White;
@@ -198,8 +202,9 @@ namespace Cursed_Market_Reborn
                         label5.ForeColor = Color.White;
                         label6.ForeColor = Color.White;
                         label7.ForeColor = Color.White;
-                        label9.ForeColor = Color.White;
                         label8.ForeColor = Color.DimGray;
+                        label9.ForeColor = Color.White;
+                        label10.ForeColor = Color.White;
                         checkBox1.ForeColor = Color.White;
                         checkBox2.ForeColor = Color.White;
                         checkBox3.ForeColor = Color.White;
@@ -232,6 +237,7 @@ namespace Cursed_Market_Reborn
                         label7.ForeColor = Color.Black;
                         label8.ForeColor = Color.Gainsboro;
                         label9.ForeColor = Color.Black;
+                        label10.ForeColor = Color.Black;
                         checkBox1.ForeColor = Color.Black;
                         checkBox2.ForeColor = Color.Black;
                         checkBox3.ForeColor = Color.Black;
@@ -375,6 +381,10 @@ namespace Cursed_Market_Reborn
                     Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/advancedSkinsControl", string.Empty, string.Empty);
                     Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED = true;
                 }
+
+                if ((bool)JsVersionCheck["isSeasonManagerEnabled"] == true)
+                    isSeasonManagerOnline = true;
+
             }
             catch { }
         }
@@ -488,6 +498,12 @@ namespace Cursed_Market_Reborn
                 if (isSaveFileLocal == false)
                 {
                     button9.Visible = true;
+                }
+
+                if (isSeasonManagerOnline == true)
+                {
+                    label10.Visible = true;
+                    comboBox3.Visible = true;
                 }
 
                 isProgramInitialized = true;
@@ -815,6 +831,35 @@ namespace Cursed_Market_Reborn
             }
             else
                 MessageBox.Show("Please, wait for SaveFile to initialize before exporting it.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+        }
+
+        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if(Globals.FIDDLERCORE_VALUE_SEASONMANAGER == string.Empty)
+                {
+                    Globals.FIDDLERCORE_VALUE_SEASONMANAGER = null;
+                    return;
+                }
+
+                string SeasonManagerResponse = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/seasonManager", $"specifiedSeason={comboBox3.SelectedIndex}", "");
+                if(SeasonManagerResponse == string.Empty)
+                {
+                    Globals.FIDDLERCORE_BOOL_SEASONMANAGER = false;
+                    Globals.FIDDLERCORE_VALUE_SEASONMANAGER = string.Empty;
+                    comboBox3.SelectedIndex = 0;
+                }
+                else
+                {
+                    Globals.FIDDLERCORE_BOOL_SEASONMANAGER = true;
+                    Globals.FIDDLERCORE_VALUE_SEASONMANAGER = SeasonManagerResponse;
+                }
+            } catch {
+                Globals.FIDDLERCORE_BOOL_SEASONMANAGER = false;
+                Globals.FIDDLERCORE_VALUE_SEASONMANAGER = string.Empty;
+                comboBox3.SelectedIndex = 0;
+            }
         }
     }
 }

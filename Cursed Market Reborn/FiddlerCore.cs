@@ -116,6 +116,15 @@ namespace Cursed_Market_Reborn
                         return;
                     }
                 }
+                if (Globals.FIDDLERCORE_BOOL_SEASONMANAGER == true)
+                {
+                    if (oSession.uriContains ("specialEventsContent.json"))
+                    {
+                        oSession.utilCreateResponseAndBypassServer();
+                        oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_SEASONMANAGER);
+                        return;
+                    }
+                }
             }
             else return;
         }
@@ -145,7 +154,6 @@ namespace Cursed_Market_Reborn
                     Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "MATCHED";
                     oSession.utilDecodeResponse();
                     Globals.FIDDLERCORE_VALUE_MMR = Globals.FIDDLERCORE_VALUETRANSFER_MMR(System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes));
-
                     return;
                 }
                 if (oSession.uriContains("api/v1/auth/provider/steam/login?token="))
