@@ -1,4 +1,8 @@
-﻿//Original script by Marsik
+// THIS CLASS IS UNUSED STARTING FROM 3.6.0.4!!!
+
+
+
+//Original script by Marsik
 
 using Org.BouncyCastle.Utilities.Zlib;
 using System;
