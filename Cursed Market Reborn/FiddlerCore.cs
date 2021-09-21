@@ -109,7 +109,7 @@ namespace Cursed_Market_Reborn
                 }
                 if (Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED == true)
                 {
-                    if (oSession.uriContains ("catalog.json"))
+                    if (oSession.uriContains ("/catalog.json"))
                     {
                         oSession.utilCreateResponseAndBypassServer();
                         oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL);
@@ -118,7 +118,7 @@ namespace Cursed_Market_Reborn
                 }
                 if (Globals.FIDDLERCORE_BOOL_SEASONMANAGER == true)
                 {
-                    if (oSession.uriContains ("specialEventsContent.json"))
+                    if (oSession.uriContains ("/specialEventsContent.json"))
                     {
                         oSession.utilCreateResponseAndBypassServer();
                         oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_SEASONMANAGER);

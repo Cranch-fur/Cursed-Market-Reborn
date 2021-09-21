@@ -432,7 +432,7 @@ namespace Cursed_Market_Reborn
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Cursed_Market_Reborn.Properties.Resources.ICON_SMALL_SETTINGS_BLACK;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 519);
+            this.pictureBox2.Location = new System.Drawing.Point(12, 539);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(32, 32);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -621,6 +621,7 @@ namespace Cursed_Market_Reborn
             "The Withering Blight (Halloween 2019 Event)",
             "Winter Solstice (Winter 2019 Event)",
             "The Eternal Blight (Halloween 2020 Event)",
+            "Fourth Year Anniversary (Anniversary 2020 Event)",
             "Gilded Stampede (Lunar 2021 Event)"});
             this.comboBox3.Location = new System.Drawing.Point(232, 509);
             this.comboBox3.Name = "comboBox3";

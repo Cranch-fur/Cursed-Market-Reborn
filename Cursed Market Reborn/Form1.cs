@@ -31,15 +31,6 @@ namespace Cursed_Market_Reborn
         static bool isSeasonManagerOnline = false;
 
 
-        protected override void WndProc(ref Message win)
-        {
-            if (win.Msg == 0x11)
-            {
-                Globals.DisableProxy();
-                MessageBox.Show("Cursed Market must be closed before shut downing PC.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-            }
-            base.WndProc(ref win);
-        }
         public Form1()
         {
             InitializeComponent();
@@ -56,9 +47,10 @@ namespace Cursed_Market_Reborn
                 CranchPalace_getFullProfile();
             });
         }
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        protected private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             FiddlerCore.Stop();
+            Globals.DisableProxy();
         }
         private void Form1_Handle_Tray(object sender, MouseEventArgs e)
         {
@@ -703,7 +695,7 @@ namespace Cursed_Market_Reborn
             {
                 if (currentstring[0] == '0')
                 {
-                    if (e.KeyChar >= 49 && e.KeyChar <= 57)
+                    if (e.KeyChar >= 49 && e.KeyChar <= 57 && e.KeyChar != 8)
                         return false;
                 }
             }
@@ -736,7 +728,7 @@ namespace Cursed_Market_Reborn
                 CranchPalace_getMarketFile(0);
 
             if (isFiddlerCoreActive == true)
-                MessageBox.Show("Changes was made when program is already running... Restart your game to see MarketFile changes.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                MessageBox.Show("Changes was made when program is already running... Restart your game to see MarketFile changes.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -844,7 +836,7 @@ namespace Cursed_Market_Reborn
                 }
 
                 string SeasonManagerResponse = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/seasonManager", $"specifiedSeason={comboBox3.SelectedIndex}", "");
-                if(SeasonManagerResponse == string.Empty)
+                if(SeasonManagerResponse.Length == 0)
                 {
                     Globals.FIDDLERCORE_BOOL_SEASONMANAGER = false;
                     Globals.FIDDLERCORE_VALUE_SEASONMANAGER = string.Empty;

@@ -42,14 +42,11 @@
     <Reference Include="BCMakeCert">
       <HintPath>..\..\Libraries\BCMakeCert.dll</HintPath>
     </Reference>
-    <Reference Include="BouncyCastle.Crypto">
-      <HintPath>..\..\Libraries\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="CranchyLib.SaveFile">
+      <HintPath>..\..\ILMerge\CranchyLibSaveFIle\CranchyLib.SaveFile.dll</HintPath>
     </Reference>
     <Reference Include="FiddlerCore">
       <HintPath>..\..\Libraries\FiddlerCore.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\Libraries\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -103,7 +100,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SaveFile.cs" />
     <Compile Include="WaitForm.cs">
       <SubType>Form</SubType>
     </Compile>
