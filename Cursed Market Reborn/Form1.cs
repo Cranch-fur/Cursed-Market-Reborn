@@ -39,6 +39,7 @@ namespace Cursed_Market_Reborn
         private async void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "Cursed Market " + Globals.PROGRAM_TEXT_OFFLINEVERSION;
+            Globals.DisableProxy();
             CranchPalace_checkVersion();
             CranchPalace_checkSSLAvailability();
             await Task.Run(() =>
@@ -353,6 +354,10 @@ namespace Cursed_Market_Reborn
                     Globals.OVERRIDEN_VALUE_USERAGENT = (string)JsVersionCheck["validUserAgent"];
                     if ((bool)JsVersionCheck["isNewsAvailable"] == true)
                     {
+                        if ((bool)JsVersionCheck["isNewsThreadCanBeSeenOnlyOnce"] == true)
+                            if (Globals.PROGRAM_NEWS_LASTSEENTHREAD == (string)JsVersionCheck["newsThreadID"])
+                                return;
+
                         if ((bool)JsVersionCheck["isNewsContainsLink"] == true)
                         {
                             DialogResult newsdialogue = MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
@@ -376,6 +381,8 @@ namespace Cursed_Market_Reborn
 
                 if ((bool)JsVersionCheck["isSeasonManagerEnabled"] == true)
                     isSeasonManagerOnline = true;
+
+                Registry.SetValue(Globals.REGISTRY_MAIN, "LSNT", (string)JsVersionCheck["newsThreadID"]);
 
             }
             catch { }

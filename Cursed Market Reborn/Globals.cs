@@ -11,8 +11,9 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3604";
+        public const string PROGRAM_OFFLINEVERSION = "3605";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
+        public static string PROGRAM_NEWS_LASTSEENTHREAD = REGISTRY_GETVALUE("LSNT");
 
         public static string REGISTRY_VALUE_PAKFILEPATH = REGISTRY_GETVALUE("PakFilePath");
         public static string REGISTRY_VALUE_PAKFOLDERPATH = REGISTRY_VALUE_PAKFILEPATH.Replace("\\pakchunk1-WindowsNoEditor.pak", "");
