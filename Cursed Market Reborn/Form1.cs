@@ -39,7 +39,6 @@ namespace Cursed_Market_Reborn
         private async void Form1_Load(object sender, EventArgs e)
         {
             this.Text = "Cursed Market " + Globals.PROGRAM_TEXT_OFFLINEVERSION;
-            Globals.DisableProxy();
             CranchPalace_checkVersion();
             CranchPalace_checkSSLAvailability();
             await Task.Run(() =>
@@ -356,7 +355,7 @@ namespace Cursed_Market_Reborn
                     {
                         if ((bool)JsVersionCheck["isNewsThreadCanBeSeenOnlyOnce"] == true)
                             if (Globals.PROGRAM_NEWS_LASTSEENTHREAD == (string)JsVersionCheck["newsThreadID"])
-                                return;
+                                goto AfterNews;
 
                         if ((bool)JsVersionCheck["isNewsContainsLink"] == true)
                         {
@@ -373,11 +372,11 @@ namespace Cursed_Market_Reborn
                     }
                 }
 
-                if((bool)JsVersionCheck["isAdvancedSkinControlEnabled"] == true)
-                {
-                    Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/advancedSkinsControl", string.Empty, string.Empty);
-                    Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED = true;
-                }
+            // GOTO TRANSITION LABEL
+            AfterNews:
+
+                if ((bool)JsVersionCheck["isAdvancedSkinControlEnabled"] == true)
+                    CranchPalac_obtainAdvancedSkinsControl();
 
                 if ((bool)JsVersionCheck["isSeasonManagerEnabled"] == true)
                     isSeasonManagerOnline = true;
@@ -387,6 +386,27 @@ namespace Cursed_Market_Reborn
             }
             catch { }
         }
+        private async void CranchPalac_obtainAdvancedSkinsControl()
+        {
+            await Task.Run(() =>
+            {
+                string output;
+                for (sbyte counter = 0; counter < 3; counter++)
+                {
+                    output = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/advancedSkinsControl", string.Empty, string.Empty);
+                    if (output.Length > 5)
+                    {
+                        Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL = output;
+                        Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED = true;
+                        return;
+                    }
+                    Thread.Sleep(1000);
+                }
+
+                MessageBox.Show("Something went wrong when program tried to initialize Advanced Skin Control, please, make sure your Ethernet connection is stable and nothing have control over it (like antivirus).", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
+            });
+        }
+
 
         private void CranchPalace_checkSSLAvailability()
         {
