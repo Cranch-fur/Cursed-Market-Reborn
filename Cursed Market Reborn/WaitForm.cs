@@ -72,5 +72,10 @@ namespace Cursed_Market_Reborn
             }
             catch { }
         }
+
+        private void WaitForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

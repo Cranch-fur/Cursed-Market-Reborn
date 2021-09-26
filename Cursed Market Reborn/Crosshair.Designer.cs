@@ -59,6 +59,7 @@ namespace Cursed_Market_Reborn
             this.Name = "Crosshair";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Overlay: CROSSHAIR";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Crosshair_FormClosing);
             this.Load += new System.EventHandler(this.Crosshair_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

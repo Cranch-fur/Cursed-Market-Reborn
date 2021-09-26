@@ -65,6 +65,7 @@ namespace Cursed_Market_Reborn
             this.Name = "WaitForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Task in progress...";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.WaitForm_FormClosing);
             this.Load += new System.EventHandler(this.WaitForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

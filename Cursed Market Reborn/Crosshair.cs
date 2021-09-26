@@ -97,5 +97,10 @@ namespace Cursed_Market_Reborn
                 Thread.Sleep(100);
             }
         }
+
+        private void Crosshair_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+        }
     }
 }

@@ -39,7 +39,8 @@ namespace Cursed_Market_Reborn
                     label4.ForeColor = Color.DimGray;
                     label5.ForeColor = Color.DimGray;
                     label6.ForeColor = Color.DimGray;
-                    label7.ForeColor = Color.Gainsboro;
+                    label7.ForeColor = Color.DimGray;
+                    label8.ForeColor = Color.Gainsboro;
                     break;
 
                 case "Legacy":
@@ -53,7 +54,8 @@ namespace Cursed_Market_Reborn
                     label4.ForeColor = Color.Gainsboro;
                     label5.ForeColor = Color.Gainsboro;
                     label6.ForeColor = Color.Gainsboro;
-                    label7.ForeColor = Color.DimGray;
+                    label7.ForeColor = Color.Gainsboro;
+                    label8.ForeColor = Color.DimGray;
 
                     break;
 
@@ -68,7 +70,8 @@ namespace Cursed_Market_Reborn
                     label4.ForeColor = Color.Gainsboro;
                     label5.ForeColor = Color.Gainsboro;
                     label6.ForeColor = Color.Gainsboro;
-                    label7.ForeColor = Color.DimGray;
+                    label7.ForeColor = Color.Gainsboro;
+                    label8.ForeColor = Color.DimGray;
                     break;
 
                 case "SaintsInaRow":
@@ -82,7 +85,8 @@ namespace Cursed_Market_Reborn
                     label4.ForeColor = Color.Gainsboro;
                     label5.ForeColor = Color.Gainsboro;
                     label6.ForeColor = Color.Gainsboro;
-                    label7.ForeColor = Color.DimGray;
+                    label7.ForeColor = Color.Gainsboro;
+                    label8.ForeColor = Color.DimGray;
                     break;
 
                 default:
@@ -96,7 +100,8 @@ namespace Cursed_Market_Reborn
                     label4.ForeColor = Color.DimGray;
                     label5.ForeColor = Color.DimGray;
                     label6.ForeColor = Color.DimGray;
-                    label2.ForeColor = Color.Gainsboro;
+                    label7.ForeColor = Color.DimGray;
+                    label8.ForeColor = Color.Gainsboro;
                     break;
             }
         }
@@ -149,7 +154,7 @@ namespace Cursed_Market_Reborn
                         {
                             IsKillerOnSteam = true;
                             KillerSteamProfile = "https://steamcommunity.com/profiles/" + (string)JsCurrentMatchInfo["slasherData"]["id"];
-                            slasherProviderOutput = $"{(string)JsCurrentMatchInfo["slasherData"]["provider"]} ({(string)JsCurrentMatchInfo["slasherData"]["id"]})";
+                            slasherProviderOutput = $"{((string)JsCurrentMatchInfo["slasherData"]["provider"]).Replace("steam", "Steam")} ({(string)JsCurrentMatchInfo["slasherData"]["id"]})";
                             label4.Invoke(new Action(() => { label4.ForeColor = SystemColors.MenuHighlight; }));
                         }
                         else
@@ -159,7 +164,7 @@ namespace Cursed_Market_Reborn
 
                             if ((string)JsCurrentMatchInfo["slasherData"]["provider"] == null)
                                 slasherProviderOutput = "UNKNOWN PLATFORM";
-                            else slasherProviderOutput = (string)JsCurrentMatchInfo["slasherData"]["provider"];
+                            else slasherProviderOutput = ((string)JsCurrentMatchInfo["slasherData"]["provider"]).Replace("grdk", "Microsoft Store").Replace("nintendo", "Nintendo Switch");
                         }
 
 
@@ -168,6 +173,10 @@ namespace Cursed_Market_Reborn
                             label4.Text = slasherProviderOutput;
                             label5.Text = $"Region: {(string)JsCurrentMatchInfo["slasherData"]["country"]}";
                             label6.Text = $"MMR: {Convert.ToInt32((float)JsCurrentMatchInfo["slasherData"]["rating"])}";
+                            
+                            if(((string)JsCurrentMatchInfo["slasherData"]["firstMatch"]) != null)
+                                label7.Text = $"First Match: {DateTimeOffset.FromUnixTimeSeconds((Int64)JsCurrentMatchInfo["slasherData"]["firstMatch"]).LocalDateTime}";
+                            else label7.Text = "UNKNOWN FIRST MATCH DATE";
 
                         }));
 
@@ -185,6 +194,7 @@ namespace Cursed_Market_Reborn
                         label4.Text = "UNKNOWN PLATFORM";
                         label5.Text = "UNKNOWN REGION";
                         label6.Text = "UNKNOWN MMR";
+                        label7.Text = "UNKNOWN FIRST MATCH DATE";
 
                         button1.Enabled = true;
                         InitializeSettings();
@@ -317,6 +327,7 @@ namespace Cursed_Market_Reborn
                 label4.Text = "";
                 label5.Text = "";
                 label6.Text = "";
+                label7.Text = "";
             }
         }
 
