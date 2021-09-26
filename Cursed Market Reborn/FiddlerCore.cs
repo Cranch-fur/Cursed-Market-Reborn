@@ -159,7 +159,9 @@ namespace Cursed_Market_Reborn
                 {
                     Globals.FIDDLERCORE_VALUE_QUEUEPOSITION = "MATCHED";
                     oSession.utilDecodeResponse();
-                    Globals.FIDDLERCORE_VALUE_MMR = Globals.FIDDLERCORE_VALUETRANSFER_MMR(System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes));
+                    string responseAsString = System.Text.Encoding.UTF8.GetString(oSession.responseBodyBytes);
+                    Globals.FIDDLERCORE_VALUE_MMR = Globals.FIDDLERCORE_VALUETRANSFER_MMR(responseAsString);
+                    Globals.MATCHINFORMER_VALUETRANSFER_FIDDLERCOREMATCHDATA(responseAsString);
                     return;
                 }
                 if (oSession.uriContains("api/v1/auth/provider/steam/login?token="))

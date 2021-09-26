@@ -21,6 +21,7 @@ namespace Cursed_Market_Reborn
     {
         ///////////////////////////////// => High Priority Actions
         Form _OVERLAY = new Overlay();
+        Form _MATCHINFORMER = new MatchInformer();
         Form _CROSSHAIR = new Crosshair();
         NotifyIcon CursedTray = new NotifyIcon();
         static bool isProgramInitialized = false;
@@ -376,7 +377,7 @@ namespace Cursed_Market_Reborn
             AfterNews:
 
                 if ((bool)JsVersionCheck["isAdvancedSkinControlEnabled"] == true)
-                    CranchPalac_obtainAdvancedSkinsControl();
+                    CranchPalace_obtainAdvancedSkinsControl();
 
                 if ((bool)JsVersionCheck["isSeasonManagerEnabled"] == true)
                     isSeasonManagerOnline = true;
@@ -386,7 +387,7 @@ namespace Cursed_Market_Reborn
             }
             catch { }
         }
-        private async void CranchPalac_obtainAdvancedSkinsControl()
+        private async void CranchPalace_obtainAdvancedSkinsControl()
         {
             await Task.Run(() =>
             {
@@ -670,9 +671,13 @@ namespace Cursed_Market_Reborn
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             if (checkBox3.Checked == true)
+            {
                 _OVERLAY.Show();
-            else
+                _MATCHINFORMER.Show();
+            } else {
                 _OVERLAY.Hide();
+                _MATCHINFORMER.Hide();
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

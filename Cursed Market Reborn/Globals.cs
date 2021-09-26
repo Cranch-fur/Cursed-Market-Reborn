@@ -11,7 +11,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3606";
+        public const string PROGRAM_OFFLINEVERSION = "3700";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
         public static string PROGRAM_NEWS_LASTSEENTHREAD = REGISTRY_GETVALUE("LSNT");
 
@@ -42,7 +42,7 @@ namespace Cursed_Market_Reborn
         public static string FIDDLERCORE_VALUE_BHVRSESSION = null;
         public static string FIDDLERCORE_VALUE_QUEUEPOSITION = "NONE";
         public static string FIDDLERCORE_VALUE_MMR = string.Empty;
-        public static string FIDDLERCORE_VALUE_ONLINELOBBY_ID = null;
+        public static string FIDDLERCORE_VALUE_CURRENTMATCHID = null;
         public static string FIDDLERCORE_VALUE_UID = null;
         public static string FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(string input)
         {
@@ -55,7 +55,7 @@ namespace Cursed_Market_Reborn
                         return (string)JsQueueResponse["queueData"]["position"];
                     else if ((string)JsQueueResponse["status"] == "MATCHED")
                     {
-                        FIDDLERCORE_VALUE_ONLINELOBBY_ID = (string)JsQueueResponse["matchData"]["matchId"];
+                        FIDDLERCORE_VALUE_CURRENTMATCHID = (string)JsQueueResponse["matchData"]["matchId"];
                         Overlay.IsMMRObtained = false;
                         return "MATCHED";
                     }
@@ -137,6 +137,127 @@ namespace Cursed_Market_Reborn
                 Registry.SetValue(regproxykeypath, "ProxyOverride", "");
             }
             catch { }
+        }
+
+        public static void MATCHINFORMER_VALUETRANSFER_FIDDLERCOREMATCHDATA(string input)
+        {
+            try
+            {
+                var JsMatchData = JObject.Parse(input);
+                string matchId = (string)JsMatchData["matchId"];
+                string characterName = (string)JsMatchData["props"]["characterName"];
+
+                bool isKillerObtained = false;
+                switch (characterName)
+                {
+                    case "Chuckles":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Bob":
+                        isKillerObtained = true;
+                        break;
+
+                    case "HillBilly":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Nurse":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Shape":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Witch":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Killer07":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Bear":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Cannibal":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Nightmare":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Pig":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Clown":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Spirit":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Legion":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Plague":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Ghostface":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Demogorgon":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Oni":
+                        isKillerObtained = true;
+                        break;
+
+                    case "Gunslinger":
+                        isKillerObtained = true;
+                        break;
+
+                    case "K20":
+                        isKillerObtained = true;
+                        break;
+
+                    case "K21":
+                        isKillerObtained = true;
+                        break;
+
+                    case "K22":
+                        isKillerObtained = true;
+                        break;
+
+                    case "K23":
+                        isKillerObtained = true;
+                        break;
+
+                    case "K24":
+                        isKillerObtained = true;
+                        break;
+
+                    case "K25":
+                        isKillerObtained = true;
+                        break;
+                }
+
+                if (isKillerObtained == true)
+                    MatchInformer.FiddlerCoreObtainedMatchInfo = matchId + ";" + characterName;
+                else
+                    MatchInformer.FiddlerCoreObtainedMatchInfo = null;
+
+            } 
+            catch { MatchInformer.FiddlerCoreObtainedMatchInfo = null; }
         }
     }
 }

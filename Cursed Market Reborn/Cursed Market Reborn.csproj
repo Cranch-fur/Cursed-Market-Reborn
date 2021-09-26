@@ -86,6 +86,12 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
+    <Compile Include="MatchInformer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MatchInformer.Designer.cs">
+      <DependentUpon>MatchInformer.cs</DependentUpon>
+    </Compile>
     <Compile Include="NetServices.cs" />
     <Compile Include="Overlay.cs">
       <SubType>Form</SubType>
@@ -114,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MatchInformer.resx">
+      <DependentUpon>MatchInformer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Overlay.resx">
       <DependentUpon>Overlay.cs</DependentUpon>
@@ -176,6 +185,87 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\CROSSHAIR_TACTIC_01_WHITE.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_K25.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_K24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_K23.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_K22.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_K20.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_K21.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Gunslinger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Plague.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Oni.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Ghostface.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Demogorgon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Legion.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Spirit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Clown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Pig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Cannibal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Bear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Nightmare.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Killer07.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Witch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Shape.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Bob.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Chuckles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_HillBilly.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Nurse.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_Missing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CHAR_UNKNOWN.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

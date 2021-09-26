@@ -38,6 +38,11 @@ namespace Cursed_Market_Reborn
                     label1.ForeColor = Color.White;
                     break;
 
+                case "SaintsInaRow":
+                    this.BackColor = Color.FromArgb(255, 37, 13, 57);
+                    label1.ForeColor = Color.White;
+                    break;
+
                 case "NONE":
                     this.BackColor = Color.White;
                     label1.ForeColor = Color.Black;

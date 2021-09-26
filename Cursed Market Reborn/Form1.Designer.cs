@@ -267,9 +267,9 @@ namespace Cursed_Market_Reborn
             this.checkBox3.Font = new System.Drawing.Font("Roboto", 9F);
             this.checkBox3.Location = new System.Drawing.Point(100, 340);
             this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(151, 18);
+            this.checkBox3.Size = new System.Drawing.Size(152, 18);
             this.checkBox3.TabIndex = 16;
-            this.checkBox3.Text = "Queue Position Overlay";
+            this.checkBox3.Text = "Match Informer Overlay";
             this.checkBox3.UseVisualStyleBackColor = true;
             this.checkBox3.Visible = false;
             this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
