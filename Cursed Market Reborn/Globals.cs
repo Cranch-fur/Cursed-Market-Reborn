@@ -11,7 +11,7 @@ namespace Cursed_Market_Reborn
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3701";
+        public const string PROGRAM_OFFLINEVERSION = "3702";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
         public static string PROGRAM_NEWS_LASTSEENTHREAD = REGISTRY_GETVALUE("LSNT");
 
@@ -44,6 +44,7 @@ namespace Cursed_Market_Reborn
         public static string FIDDLERCORE_VALUE_MMR = string.Empty;
         public static string FIDDLERCORE_VALUE_CURRENTMATCHID = null;
         public static string FIDDLERCORE_VALUE_UID = null;
+        public static string FIDDLERCORE_VALUE_PID = null;
         public static string FIDDLERCORE_VALUETRANSFER_QUEUEPOSITION(string input)
         {
             if (FIDDLERCORE_VALUE_QUEUEPOSITION != null)
@@ -100,6 +101,22 @@ namespace Cursed_Market_Reborn
                 JsSaveFile["playerUId"] = FIDDLERCORE_VALUE_UID;
                 JsSaveFile["currentSeasonTicks"] = (long)((DateTime.Now.ToUniversalTime() - CurrentNETtimestampstart).TotalMilliseconds + 0.5);
                 return SaveFile.EncryptSavefile(JsonConvert.SerializeObject(JsSaveFile, Formatting.None));
+            }
+            else return null;
+        }
+
+        public static string FIDDLERCORE_VALUETRANSFER_MARKETFILE()
+        {
+            if (FIDDLERCORE_VALUE_MARKETFILE != null)
+            {
+                try
+                {
+                    JObject JsMarketFile = JObject.Parse(FIDDLERCORE_VALUE_MARKETFILE);
+                    JObject JsMarketFileData = (JObject)JsMarketFile.SelectToken("data");
+                    JsMarketFileData.Property("playerId").Value = FIDDLERCORE_VALUE_PID;
+                    return JsMarketFile.ToString();
+                }
+                catch { return FIDDLERCORE_VALUE_MARKETFILE; }
             }
             else return null;
         }

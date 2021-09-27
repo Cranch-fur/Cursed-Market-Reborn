@@ -24,6 +24,10 @@ namespace Cursed_Market_Reborn
 
         private void Crosshair_Load(object sender, EventArgs e)
         {
+            // Action to prevent any 3-rd party tool from 'easy scan' in process list
+            System.Security.Cryptography.MD5 md5hash = System.Security.Cryptography.MD5.Create();
+            this.Text = Convert.ToBase64String(md5hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(this.Text)));
+
             CheckForIllegalCrossThreadCalls = false;
             this.ShowInTaskbar = false;
             this.TopMost = true;

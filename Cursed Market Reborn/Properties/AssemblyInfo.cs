@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Cursed Market Reborn")]
-[assembly: AssemblyDescription("Open-Source Cursed Market")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("SERVERNAME")]
 [assembly: AssemblyProduct("Cursed Market Reborn")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.7.0.1")]
-[assembly: AssemblyFileVersion("3.7.0.1")]
+[assembly: AssemblyVersion("3.7.0.2")]
+[assembly: AssemblyFileVersion("3.7.0.2")]

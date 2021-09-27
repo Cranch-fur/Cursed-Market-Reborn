@@ -31,6 +31,29 @@ namespace Cursed_Market_Reborn
             }
             catch { return "ERROR"; }
         }
+        public static void REQUEST_DBDEMULATION(string URL)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create("https://" + URL);
+                request.Timeout = 7000;
+                request.ServicePoint.Expect100Continue = true;
+
+                if(Globals.OVERRIDEN_VALUE_USERAGENT != null)
+                    request.UserAgent = Globals.OVERRIDEN_VALUE_USERAGENT;
+                else request.UserAgent = "DeadByDaylight/++DeadByDaylight+Live-CL-464461 Windows/10.0.22000.1.768.64bit";
+
+                request.Headers.Add("Cookie", "bhvrSession=" + Globals.FIDDLERCORE_VALUE_BHVRSESSION);
+                request.Headers.Add("x-kraken-client-version", "5.2.2");
+                request.Headers.Add("x-kraken-client-provider", "steam");
+                request.Headers.Add("x-kraken-client-platform", "steam");
+                request.Headers.Add("x-kraken-client-os", "21.7.28700.1.768.64bit");
+                request.ContentType = "application/json";
+
+                request.GetResponse();
+            }
+            catch { }
+        }
         public static string REQUEST_POST(string URL, string variable, string useragent, string cookies, string content)
         {
             try

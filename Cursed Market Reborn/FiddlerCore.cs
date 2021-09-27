@@ -56,12 +56,25 @@ namespace Cursed_Market_Reborn
                         Globals.FIDDLERCORE_VALUE_PLATFORM = "grdk.live";
                     return;
                 }
-                if (oSession.uriContains("api/v1/inventories"))
+
+                if(oSession.uriContains("api/v1/friends/richPresence"))
                 {
-                    oSession.utilCreateResponseAndBypassServer();
-                    oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_MARKETFILE);
+                    Globals.FIDDLERCORE_VALUE_PID = oSession.url.Remove(0, oSession.url.LastIndexOf("/") + 1);
                     return;
                 }
+
+                if (oSession.uriContains("api/v1/inventories"))
+                {
+                    if (oSession.oRequest["x-kraken-client-os"] != "21.7.28700.1.768.64bit")
+                    {
+                        oSession.utilCreateResponseAndBypassServer();
+                        oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUETRANSFER_MARKETFILE());
+                        NetServices.REQUEST_DBDEMULATION(oSession.url);
+                    }
+                    
+                    return;
+                }
+
                 if (Globals.FIDDLERCORE_BOOL_ANTIBOTMATCH == true)
                 {
                     if (oSession.uriContains("api/v1/onboarding/get-bot-match-status"))
@@ -71,33 +84,46 @@ namespace Cursed_Market_Reborn
                         return;
                     }
                 }
+
                 if (Globals.FIDDLERCORE_BOOL_SILENTFULLPROFILE == true)
                 {
                     if (oSession.uriContains("api/v1/players/me/states/FullProfile/binary"))
                     {
-                        oSession.utilCreateResponseAndBypassServer();
-                        oSession.oResponse["Content-Type"] = "application/octet-stream";
-                        oSession.oResponse["Kraken-State-Version"] = "1";
-                        oSession.oResponse["Kraken-State-Schema-Version"] = "0";
-                        oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUETRANSFER_FULLPROFILE());
+                        if (oSession.oRequest["x-kraken-client-os"] != "21.7.28700.1.768.64bit")
+                        {
+                            oSession.utilCreateResponseAndBypassServer();
+                            oSession.oResponse["Content-Type"] = "application/octet-stream";
+                            oSession.oResponse["Kraken-State-Version"] = "1";
+                            oSession.oResponse["Kraken-State-Schema-Version"] = "0";
+                            oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUETRANSFER_FULLPROFILE());
+                            NetServices.REQUEST_DBDEMULATION(oSession.url);
+                        }
+
                         return;
                     }
                     if (oSession.uriContains("api/v1/players/me/states/binary?schemaVersion"))
                     {
                         oSession.utilCreateResponseAndBypassServer();
-                        oSession.utilSetResponseBody("{\"version\":1,\"stateName\":\"FullProfile\",\"schemaVersion\":0,\"playerId\":\"0cfddbd9-4738-d130-aa5e-6e4f165b4440\"}");
+                        oSession.utilSetResponseBody("{\"version\":1,\"stateName\":\"FullProfile\",\"schemaVersion\":0,\"playerId\":\"" + Globals.FIDDLERCORE_VALUE_PID + "\"}");
                         return;
                     }
                 }
+
                 if (Globals.FIDDLERCORE_BOOL_CURRENCYSPOOF == true)
                 {
                     if (oSession.uriContains("api/v1/wallet/currencies"))
                     {
-                        oSession.utilCreateResponseAndBypassServer();
-                        oSession.utilSetResponseBody("{\"list\":[{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS + ",\"currency\":\"Shards\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS + ",\"currency\":\"Cells\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS + ",\"currency\":\"BonusBloodpoints\"},{\"balance\":0,\"currency\":\"Bloodpoints\"}]}");
+                        if (oSession.oRequest["x-kraken-client-os"] != "21.7.28700.1.768.64bit")
+                        {
+                            oSession.utilCreateResponseAndBypassServer();
+                            oSession.utilSetResponseBody("{\"list\":[{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_SHARDS + ",\"currency\":\"Shards\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_CELLS + ",\"currency\":\"Cells\"},{\"balance\":" + Globals.FIDDLERCORE_VALUE_CURRENCYSPOOF_BLOODPOINTS + ",\"currency\":\"BonusBloodpoints\"},{\"balance\":0,\"currency\":\"Bloodpoints\"}]}");
+                            NetServices.REQUEST_DBDEMULATION(oSession.url);
+                        }
+
                         return;
                     }
                 }
+
                 if (Globals.FIDDLERCORE_BOOL_FREEBLOODWEB == true)
                 {
                     if (oSession.uriContains("v1/wallet/withdraw"))
@@ -107,24 +133,26 @@ namespace Cursed_Market_Reborn
                         return;
                     }
                 }
+
                 if (Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED == true)
                 {
                     if (oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
                         return;
 
-                    if (oSession.uriContains ("/catalog.json"))
+                    if (oSession.uriContains("/catalog.json"))
                     {
                         oSession.utilCreateResponseAndBypassServer();
                         oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL);
                         return;
                     }
                 }
+
                 if (Globals.FIDDLERCORE_BOOL_SEASONMANAGER == true)
                 {
                     if (oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
                         return;
 
-                    if (oSession.uriContains ("/specialEventsContent.json"))
+                    if (oSession.uriContains("/specialEventsContent.json"))
                     {
                         oSession.utilCreateResponseAndBypassServer();
                         oSession.utilSetResponseBody(Globals.FIDDLERCORE_VALUE_SEASONMANAGER);
@@ -134,6 +162,7 @@ namespace Cursed_Market_Reborn
             }
             else return;
         }
+
         public static void FiddlerToCatchAfterSessionComplete(Session oSession)
         {
             if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com" || oSession.hostname == "latest.ptb.bhvrdbd.com")
