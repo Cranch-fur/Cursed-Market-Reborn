@@ -16,6 +16,9 @@ namespace Cursed_Market_Reborn
 
         private void WaitForm_Load(object sender, EventArgs e)
         {
+            // Action to prevent any 3-rd party tool from 'easy scan' in process list
+            this.Text = Globals.PROGRAM_RANDOMNAME();
+
             SimpleTextAnimation();
             this.TopMost = true;
         }

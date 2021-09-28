@@ -10,8 +10,16 @@ namespace Cursed_Market_Reborn
     {
         ///////////////////////////////// => High Priority Variables
         public static string PROGRAM_EXECUTABLE = System.AppDomain.CurrentDomain.FriendlyName;
+        public static string PROGRAM_RANDOMNAME()
+        {
+            Random rnd = new Random();
+            byte[] array = new byte[rnd.Next(8, 16)];
+            rnd.NextBytes(array);
+            return System.Convert.ToBase64String(array);
+        }
+
         public const string REGISTRY_MAIN = @"HKEY_CURRENT_USER\SOFTWARE\Cursed Market";
-        public const string PROGRAM_OFFLINEVERSION = "3702";
+        public const string PROGRAM_OFFLINEVERSION = "3703";
         public static string PROGRAM_TEXT_OFFLINEVERSION = System.Text.RegularExpressions.Regex.Replace(PROGRAM_OFFLINEVERSION, "(.)", "$1.").Remove(PROGRAM_OFFLINEVERSION.Length * 2 - 1);
         public static string PROGRAM_NEWS_LASTSEENTHREAD = REGISTRY_GETVALUE("LSNT");
 

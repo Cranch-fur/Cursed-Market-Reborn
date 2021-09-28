@@ -1,16 +1,17 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cursed Market Reborn")]
+[assembly: AssemblyTitle("EC728E83")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("SERVERNAME")]
-[assembly: AssemblyProduct("Cursed Market Reborn")]
-[assembly: AssemblyCopyright("SERVERNAME©  2021")]
+[assembly: AssemblyCompany("261E7099")]
+[assembly: AssemblyProduct("EC728E83")]
+[assembly: AssemblyCopyright("Cranch (Кранч) the Wolf")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0a2e420b-883e-414e-98c9-cb2b668a0963")]
+[assembly: Guid("d935286e-bf67-4373-ad2e-e2610b8bf580")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +33,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.7.0.2")]
-[assembly: AssemblyFileVersion("3.7.0.2")]
+[assembly: AssemblyVersion("3.7.0.3")]
+[assembly: AssemblyFileVersion("3.7.0.3")]
+[assembly: NeutralResourcesLanguage("en")]

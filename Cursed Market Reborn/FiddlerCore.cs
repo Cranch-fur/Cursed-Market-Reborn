@@ -36,7 +36,7 @@ namespace Cursed_Market_Reborn
         {
             EnsureRootCertificate();
             CONFIG.IgnoreServerCertErrors = true;
-            FiddlerApplication.Startup(new FiddlerCoreStartupSettingsBuilder().ListenOnPort(8888).RegisterAsSystemProxy().ChainToUpstreamGateway().DecryptSSL().OptimizeThreadPool().Build());
+            FiddlerApplication.Startup(new FiddlerCoreStartupSettingsBuilder().ListenOnPort(8866).RegisterAsSystemProxy().ChainToUpstreamGateway().DecryptSSL().OptimizeThreadPool().Build());
         }
         public static void Stop()
         {

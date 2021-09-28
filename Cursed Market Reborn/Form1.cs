@@ -39,9 +39,9 @@ namespace Cursed_Market_Reborn
         }
         private async void Form1_Load(object sender, EventArgs e)
         {
+            //this.Text = "Cursed Market " + Globals.PROGRAM_TEXT_OFFLINEVERSION;
             // Action to prevent any 3-rd party tool from 'easy scan' in process list
-            System.Security.Cryptography.MD5 md5hash = System.Security.Cryptography.MD5.Create();
-            this.Text = Convert.ToBase64String(md5hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes("Cursed Market " + Globals.PROGRAM_TEXT_OFFLINEVERSION)));
+            this.Text = Globals.PROGRAM_RANDOMNAME();
 
             CranchPalace_checkVersion();
             CranchPalace_checkSSLAvailability();

@@ -21,8 +21,7 @@ namespace Cursed_Market_Reborn
                 textBox1.Text = Globals.REGISTRY_VALUE_PAKFILEPATH;
 
             // Action to prevent any 3-rd party tool from 'easy scan' in process list
-            System.Security.Cryptography.MD5 md5hash = System.Security.Cryptography.MD5.Create();
-            this.Text = Convert.ToBase64String(md5hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(this.Text)));
+            this.Text = Globals.PROGRAM_RANDOMNAME();
         }
         private void InitializeSettings()
         {
