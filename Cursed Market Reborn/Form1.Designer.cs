@@ -170,7 +170,7 @@ namespace Cursed_Market_Reborn
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(112, 20);
             this.button4.TabIndex = 5;
-            this.button4.Text = "INSTALL";
+            this.button4.Text = "DOWNLOAD";
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -617,12 +617,7 @@ namespace Cursed_Market_Reborn
             this.comboBox3.Font = new System.Drawing.Font("Roboto", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Items.AddRange(new object[] {
-            "DEFAULT",
-            "The Withering Blight (Halloween 2019 Event)",
-            "Winter Solstice (Winter 2019 Event)",
-            "The Eternal Blight (Halloween 2020 Event)",
-            "Fourth Year Anniversary (Anniversary 2020 Event)",
-            "Gilded Stampede (Lunar 2021 Event)"});
+            "DEFAULT"});
             this.comboBox3.Location = new System.Drawing.Point(232, 509);
             this.comboBox3.Name = "comboBox3";
             this.comboBox3.Size = new System.Drawing.Size(269, 21);

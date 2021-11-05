@@ -10,7 +10,6 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.IO.Compression;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -45,6 +44,7 @@ namespace Cursed_Market_Reborn
 
             CranchPalace_checkVersion();
             CranchPalace_checkSSLAvailability();
+            CranchPalace_getAvailableSeasons();
             await Task.Run(() =>
             {
                 CranchPalace_getMarketFile(0);
@@ -342,7 +342,7 @@ namespace Cursed_Market_Reborn
         {
             try
             {
-                var JsVersionCheck = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/versionCheck", $"version={Globals.PROGRAM_OFFLINEVERSION}", ""));
+                var JsVersionCheck = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/versionCheck", $"version={Globals.PROGRAM_OFFLINEVERSION}", ""));
                 if ((bool)JsVersionCheck["isValid"] == false)
                 {
                     DialogResult askforupdate = MessageBox.Show("New Version of Cursed Market is available!\nDownload Latest Version?", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
@@ -355,23 +355,23 @@ namespace Cursed_Market_Reborn
                 else
                 {
                     Globals.OVERRIDEN_VALUE_USERAGENT = (string)JsVersionCheck["validUserAgent"];
-                    if ((bool)JsVersionCheck["isNewsAvailable"] == true)
+                    if ((bool)JsVersionCheck["NEWS"]["isNewsAvailable"] == true)
                     {
-                        if ((bool)JsVersionCheck["isNewsThreadCanBeSeenOnlyOnce"] == true)
-                            if (Globals.PROGRAM_NEWS_LASTSEENTHREAD == (string)JsVersionCheck["newsThreadID"])
+                        if ((bool)JsVersionCheck["NEWS"]["isNewsThreadCanBeSeenOnlyOnce"] == true)
+                            if (Globals.PROGRAM_NEWS_LASTSEENTHREAD == (string)JsVersionCheck["NEWS"]["newsThreadID"])
                                 goto AfterNews;
 
-                        if ((bool)JsVersionCheck["isNewsContainsLink"] == true)
+                        if ((bool)JsVersionCheck["NEWS"]["isNewsContainsLink"] == true)
                         {
-                            DialogResult newsdialogue = MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+                            DialogResult newsdialogue = MessageBox.Show((string)JsVersionCheck["NEWS"]["newsText"], (string)JsVersionCheck["NEWS"]["newsTitle"], MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
                             if (newsdialogue == DialogResult.Yes)
-                                Process.Start((string)JsVersionCheck["newsLink"]);
+                                Process.Start((string)JsVersionCheck["NEWS"]["newsLink"]);
                         }
                         else
-                            MessageBox.Show((string)JsVersionCheck["newsText"], (string)JsVersionCheck["newsTitle"], MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                            MessageBox.Show((string)JsVersionCheck["NEWS"]["newsText"], (string)JsVersionCheck["NEWS"]["newsTitle"], MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
 
 
-                        if ((bool)JsVersionCheck["isNewsCollapsingApplication"] == true)
+                        if ((bool)JsVersionCheck["NEWS"]["isNewsCollapsingApplication"] == true)
                             this.Close();
                     }
                 }
@@ -379,10 +379,10 @@ namespace Cursed_Market_Reborn
             // GOTO TRANSITION LABEL
             AfterNews:
 
-                if ((bool)JsVersionCheck["isAdvancedSkinControlEnabled"] == true)
+                if ((bool)JsVersionCheck["SPECIAL"]["isAdvancedSkinControlEnabled"] == true)
                     CranchPalace_obtainAdvancedSkinsControl();
 
-                if ((bool)JsVersionCheck["isSeasonManagerEnabled"] == true)
+                if ((bool)JsVersionCheck["SPECIAL"]["isSeasonManagerEnabled"] == true)
                     isSeasonManagerOnline = true;
 
                 Registry.SetValue(Globals.REGISTRY_MAIN, "LSNT", (string)JsVersionCheck["newsThreadID"]);
@@ -397,7 +397,7 @@ namespace Cursed_Market_Reborn
                 string output;
                 for (sbyte counter = 0; counter < 3; counter++)
                 {
-                    output = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/advancedSkinsControl", string.Empty, string.Empty);
+                    output = NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/advancedSkinsControl.json", string.Empty, string.Empty);
                     if (output.Length > 5)
                     {
                         Globals.FIDDLERCORE_VALUE_ADVANCEDSKINCONTROL = output;
@@ -416,20 +416,20 @@ namespace Cursed_Market_Reborn
         {
             try
             {
-                var JsSSLAvailability = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/availableSSL", "", ""));
-                if ((bool)JsSSLAvailability["isShippingAvailable"] == true)
+                var JsSSLAvailability = JObject.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/availableSSL", "", ""));
+                if ((bool)JsSSLAvailability["SHIPPING"]["available"] == true)
                 {
-                    label2.Text = label2.Text + (string)JsSSLAvailability["ShippingDescription"];
-                    Globals.SSL_SHIPPING = (string)JsSSLAvailability["ShippingDownloadLink"];
+                    label2.Text = label2.Text + (string)JsSSLAvailability["SHIPPING"]["description"];
+                    Globals.SSL_SHIPPING = (string)JsSSLAvailability["SHIPPING"]["downloadLink"];
                     comboBox1.Items.Add("Shipping (Default)");
                     comboBox1.SelectedItem = "Shipping (Default)";
                 }
                 else { label2.Text = label2.Text + "Not available at current moment"; }
 
-                if ((bool)JsSSLAvailability["isPTBAvailable"] == true)
+                if ((bool)JsSSLAvailability["PTB"]["available"] == true)
                 {
-                    label3.Text = label3.Text + (string)JsSSLAvailability["PTBDescription"];
-                    Globals.SSL_PTB = (string)JsSSLAvailability["PTBDownloadLink"];
+                    label3.Text = label3.Text + (string)JsSSLAvailability["PTB"]["description"];
+                    Globals.SSL_PTB = (string)JsSSLAvailability["PTB"]["downloadLink"];
                     comboBox1.Items.Add("PTB (Public Test Build)");
                 }
                 else { label3.Text = label3.Text + "Not available at current moment"; }
@@ -443,6 +443,25 @@ namespace Cursed_Market_Reborn
             }
         }
 
+        private void CranchPalace_getAvailableSeasons()
+        {
+            if (isSeasonManagerOnline == true)
+            {
+                try
+                {
+                    var JsSeasonsArray = JArray.Parse(NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/seasonManager", "check", ""));
+                    foreach (JValue obj in JsSeasonsArray)
+                    {
+                        comboBox3.Items.Add(obj);
+                    }
+                    label10.Visible = true;
+                    comboBox3.Visible = true;
+                }
+                catch
+                { }
+            }
+        }
+
         private void CranchPalace_getMarketFile(sbyte isDLConly)
         {
             try
@@ -452,11 +471,11 @@ namespace Cursed_Market_Reborn
                     switch (isDLConly)
                     {
                         case 0:
-                            Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/marketFile", "isDLConly=false", ""));
+                            Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/marketFile", "", ""));
                             isMarketFileInitialized = true;
                             break;
                         case 1:
-                            Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/marketFile", "isDLConly=true", ""));
+                            Globals.FIDDLERCORE_VALUE_MARKETFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/marketFile", "DLConly", ""));
                             isMarketFileInitialized = true;
                             break;
                     }
@@ -482,7 +501,7 @@ namespace Cursed_Market_Reborn
             {
                 if (!File.Exists("SaveFile.txt")) // Check if there's no SaveFile in folder with Market, if there is - (else) initialize this file
                 {
-                    Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/fullProfile", "", ""));
+                    Globals.FIDDLERCORE_VALUE_FULLPROFILE = Globals.Base64Decode(NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/fullProfile.json", "", ""));
                 }
                 else
                 {
@@ -523,12 +542,6 @@ namespace Cursed_Market_Reborn
                     button9.Visible = true;
                 }
 
-                if (isSeasonManagerOnline == true)
-                {
-                    label10.Visible = true;
-                    comboBox3.Visible = true;
-                }
-
                 isProgramInitialized = true;
             }));
         }
@@ -558,98 +571,16 @@ namespace Cursed_Market_Reborn
             textBox5.Visible = true;
         }
 
-        private async void button4_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
             if (comboBox1.SelectedItem != null)
             {
-                if ((string)comboBox1.SelectedItem == "Shipping (Default)")
-                {
-                    if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH))
-                    {
-                        Form waitform = new WaitForm();
-                        waitform.Show();
-                        await Task.Run(() =>
-                        {
-                            if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
-                                File.Delete(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup");
-                            File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH, Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup");
-                            if (NetServices.REQUEST_DOWNLOAD(Globals.SSL_SHIPPING, Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip"))
-                            {
-                                ZipFile.ExtractToDirectory(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip", Globals.REGISTRY_VALUE_PAKFOLDERPATH);
-                                File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
-                                waitform.Close();
-                                MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                                return;
-                            }
-                            else
-                            {
-                                waitform.Close();
-                                File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
-                                MessageBox.Show("Cursed Market can't access SSL Bypass file in AUTO mode, SSL bypass will be downloaded manually after you press OK", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                                Process.Start(Globals.SSL_SHIPPING);
-                                return;
-                            }
-                        });
-                    }
-                    else
-                    {
-                        if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
-                        {
-                            File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
-                            button4.PerformClick();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                            return;
-                        }
-                    }
-                }
+                if (((string)comboBox1.SelectedItem)[0] == 'S')
+                    Process.Start(Globals.SSL_SHIPPING);
                 else
-                {
-                    if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH))
-                    {
-                        Form waitform = new WaitForm();
-                        waitform.Show();
-                        await Task.Run(() =>
-                        {
-                            if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
-                                File.Delete(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup");
-                            File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH, Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup");
-                            if (NetServices.REQUEST_DOWNLOAD(Globals.SSL_PTB, Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip"))
-                            {
-                                ZipFile.ExtractToDirectory(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip", Globals.REGISTRY_VALUE_PAKFOLDERPATH);
-                                File.Delete(Globals.REGISTRY_VALUE_PAKFOLDERPATH + "\\SSL.zip");
-                                waitform.Close();
-                                MessageBox.Show("SSL Bypass was successfully installed!", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
-                                return;
-                            }
-                            else
-                            {
-                                waitform.Close();
-                                File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
-                                MessageBox.Show("Cursed Market can't access SSL Bypass file in AUTO mode, manual SSL bypass download will be started after you press OK", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
-                                Process.Start(Globals.SSL_PTB);
-                                return;
-                            }
-                        });
-                    }
-                    else
-                    {
-                        if (File.Exists(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup"))
-                        {
-                            File.Move(Globals.REGISTRY_VALUE_PAKFILEPATH + ".backup", Globals.REGISTRY_VALUE_PAKFILEPATH);
-                            button4.PerformClick();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Please, specify path to the \"pakchunk1-WindowsNoEditor.pak\" through settings menu.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button1);
-                            return;
-                        }
-                    }
-                }
+                    Process.Start(Globals.SSL_PTB);
             }
-            else { MessageBox.Show("ERROR_NOTHINGSELECTED", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
+            else { MessageBox.Show("Unexpected Error - Nothing Selected.", Globals.PROGRAM_EXECUTABLE, MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1); }
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -864,23 +795,22 @@ namespace Cursed_Market_Reborn
         {
             try
             {
-                if(Globals.FIDDLERCORE_VALUE_SEASONMANAGER == string.Empty)
-                {
-                    Globals.FIDDLERCORE_VALUE_SEASONMANAGER = null;
-                    return;
-                }
-
-                string SeasonManagerResponse = NetServices.REQUEST_GET("http://api.cranchpalace.info/v1/cursedmarketconcept/seasonManager", $"specifiedSeason={comboBox3.SelectedIndex}", "");
-                if(SeasonManagerResponse.Length == 0)
+                if(comboBox3.SelectedIndex == 0)
                 {
                     Globals.FIDDLERCORE_BOOL_SEASONMANAGER = false;
                     Globals.FIDDLERCORE_VALUE_SEASONMANAGER = string.Empty;
                     comboBox3.SelectedIndex = 0;
-                }
-                else
-                {
-                    Globals.FIDDLERCORE_BOOL_SEASONMANAGER = true;
-                    Globals.FIDDLERCORE_VALUE_SEASONMANAGER = SeasonManagerResponse;
+                } else {
+                    string SeasonManagerResponse = NetServices.REQUEST_GET("http://api.cranchpalace.info/v2/cursedmarket/seasonManager", $"specifiedSeason={comboBox3.SelectedIndex - 1}", "");
+                    if (SeasonManagerResponse.Length == 0)
+                    {
+                        Globals.FIDDLERCORE_BOOL_SEASONMANAGER = false;
+                        Globals.FIDDLERCORE_VALUE_SEASONMANAGER = string.Empty;
+                        comboBox3.SelectedIndex = 0;
+                    } else {
+                        Globals.FIDDLERCORE_BOOL_SEASONMANAGER = true;
+                        Globals.FIDDLERCORE_VALUE_SEASONMANAGER = SeasonManagerResponse;
+                    }
                 }
             } catch {
                 Globals.FIDDLERCORE_BOOL_SEASONMANAGER = false;

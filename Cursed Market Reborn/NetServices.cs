@@ -13,7 +13,7 @@ namespace Cursed_Market_Reborn
                 if (variable != "")
                     URL = URL + $"?{variable}";
                 if (variable2 != "")
-                    URL = URL + $"?{variable2}";
+                    URL = URL + $"&{variable2}";
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
                 request.Timeout = 7000;

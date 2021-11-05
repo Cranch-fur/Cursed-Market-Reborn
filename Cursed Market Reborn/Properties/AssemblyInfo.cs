@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("EC728E83")]
+[assembly: AssemblyTitle("Spotify")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("261E7099")]
-[assembly: AssemblyProduct("EC728E83")]
-[assembly: AssemblyCopyright("Cranch (Кранч) the Wolf")]
+[assembly: AssemblyCompany("Cookie Industrials")]
+[assembly: AssemblyProduct("Spotify")]
+[assembly: AssemblyCopyright("SERVERNAME 2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -21,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d935286e-bf67-4373-ad2e-e2610b8bf580")]
+[assembly: Guid("adf21dd0-75cb-4b72-a5c2-bfdf7847f03d")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -33,6 +33,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("3.7.0.3")]
-[assembly: AssemblyFileVersion("3.7.0.3")]
+[assembly: AssemblyVersion("3.8.0.0")]
+[assembly: AssemblyFileVersion("3.8.0.0")]
 [assembly: NeutralResourcesLanguage("en")]
