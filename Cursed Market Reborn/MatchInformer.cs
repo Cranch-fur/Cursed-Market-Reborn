@@ -307,6 +307,10 @@ namespace Cursed_Market_Reborn
                     label3.Invoke(new Action(() => { label3.Text = "K25 - THE CENOBITE"; pictureBox2.Image = Properties.Resources.CHAR_K25; }));
                     break;
 
+                case "K26":
+                    label3.Invoke(new Action(() => { label3.Text = "K26 - SAMPLETEXT"; pictureBox2.Image = Properties.Resources.CHAR_UNKNOWN; }));
+                    break;
+
                 case null:
                     label3.Invoke(new Action(() => { label3.Text = "UNKNOWN KILLER"; pictureBox2.Image = Properties.Resources.CHAR_UNKNOWN; }));
                     break;

@@ -45,7 +45,7 @@ namespace Cursed_Market_Reborn
         }
         public static void FiddlerToCatchBeforeRequest(Session oSession)
         {
-            if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com" || oSession.hostname == "cdn.live.dbd.bhvronline.com" || oSession.hostname == "latest.ptb.bhvrdbd.com" || oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
+            if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com" || oSession.hostname == "brill.live.bhvrdbd.com" || oSession.hostname == "cdn.live.dbd.bhvronline.com" || oSession.hostname == "latest.ptb.bhvrdbd.com" || oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
             {
                 if (oSession.uriContains("api/v1/config"))
                 {
@@ -54,6 +54,8 @@ namespace Cursed_Market_Reborn
                         Globals.FIDDLERCORE_VALUE_PLATFORM = "steam.live";
                     else if (oSession.uriContains("grdk.live"))
                         Globals.FIDDLERCORE_VALUE_PLATFORM = "grdk.live";
+                    else if (oSession.uriContains("brill.live"))
+                        Globals.FIDDLERCORE_VALUE_PLATFORM = "brill.live";
                     return;
                 }
 
@@ -137,7 +139,10 @@ namespace Cursed_Market_Reborn
                 if (Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED == true)
                 {
                     if (oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
+                    {
+                        Globals.FIDDLERCORE_BOOL_ISADVANCEDSKINCONTROLENABLED = false;
                         return;
+                    }
 
                     if (oSession.uriContains("/catalog.json"))
                     {
@@ -150,7 +155,9 @@ namespace Cursed_Market_Reborn
                 if (Globals.FIDDLERCORE_BOOL_SEASONMANAGER == true)
                 {
                     if (oSession.hostname == "cdn.ptb.dbd.bhvronline.com")
-                        return;
+                    {
+
+                    }
 
                     if (oSession.uriContains("/specialEventsContent.json"))
                     {
@@ -165,7 +172,7 @@ namespace Cursed_Market_Reborn
 
         public static void FiddlerToCatchAfterSessionComplete(Session oSession)
         {
-            if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com" || oSession.hostname == "latest.ptb.bhvrdbd.com")
+            if (oSession.hostname == "steam.live.bhvrdbd.com" || oSession.hostname == "grdk.live.bhvrdbd.com" || oSession.hostname == "brill.live.bhvrdbd.com" || oSession.hostname == "latest.ptb.bhvrdbd.com")
             {
                 if (oSession.uriContains("api/v1/queue"))
                 {
